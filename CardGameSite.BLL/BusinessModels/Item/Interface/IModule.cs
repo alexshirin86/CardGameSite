@@ -1,7 +1,8 @@
-using System;
 
-namespace Model.Item.Interface {
-	public interface IModule {
+namespace CardGameSite.BLL.BusinessModels.Item.Interface
+{
+	public interface IModule
+	{
 	}
 
 }

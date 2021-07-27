@@ -1,23 +1,13 @@
-///////////////////////////////////////////////////////////
-//  IMarket.cs
-//  Implementation of the Interface IMarket
-//  Created on:      07-θών-2021 13:17:52
-//  Original author: Aleksey Shirin
-///////////////////////////////////////////////////////////
-
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
+using CardGameSite.BLL.BusinessModels.Item;
+using CardGameSite.BLL.BusinessModels.Account.Interfaces;
 
-namespace Model.Interfaces {
-	public interface IMarket  {
+namespace CardGameSite.BLL.BusinessModels.Interfaces 
+{
+	public interface IMarket  
+	{
+		IAccount Account{ get; }
 
-		IAccount Account{
-			get;			
-		}
-
-		void ShowProducts();
-	}//end IMarket
-
-}//end namespace Interfaces
+		List<Product> GetProducts();
+	}
+}

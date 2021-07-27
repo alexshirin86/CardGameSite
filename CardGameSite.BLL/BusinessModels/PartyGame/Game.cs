@@ -2,15 +2,18 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CardGameSite.BLL.BusinessModels.Account.Interfaces;
 
 
-namespace Model.PartyGame {
+namespace CardGameSite.BLL.BusinessModels.PartyGame
+{
 	[Serializable]
-	public class Game {
-		public Player PlayerOne { get; init; }
-		public Player PlayerTwo { get; init; }
+	public class Game 
+	{
+		public Player PlayerOne { get; }
+		public Player PlayerTwo { get; }
 
-		public Game(Interfaces.IAccount accountOne, Interfaces.IAccount accountTwo) {
+		public Game(IAccount accountOne, IAccount accountTwo) {
 			PlayerOne = new Player(accountOne);
 			PlayerTwo = new Player(accountTwo);
 			

@@ -1,32 +1,26 @@
 using System;
 using System.Collections.Generic;
-using Model.Interfaces;
+using CardGameSite.BLL.BusinessModels.Account.Interfaces;
+using CardGameSite.BLL.BusinessModels.Item;
+using System.Linq;
 
-namespace Model {
+namespace CardGameSite.BLL.BusinessModels
+{
 	public class MarketVip : MarketPlayer
     {
 
-        public MarketVip(IAccount account)
+        public MarketVip(IAccount account) : base (account)
         {
 
-            Trash trash = new Trash();
-            Account = account;
-            Console.WriteLine("Магазин для вип игроков");
         }
 
-        public new void ShowProducts(){
+        public new List<Product> GetProducts()
+		{
+            			
+			List<Product> productsPlayers = base.GetProducts();
+            List<Product> products = productsPlayers.Union( DB.GetProductsMarketVip() );
 
-			base.ShowProducts();
-			Console.WriteLine("Предложения для вип игроков");
-			List<ProductDB> products = DB.GetProductsMarketVip();
-	
-			int i = 1;
-			foreach (ProductDB product in products) {
-				Console.WriteLine( $"{i}. {product.Name} {product. Price}. Доступная скидка {Account.Disscount}.");
-				i++;
-			}
-	
-			Console.WriteLine("\n");
+            return products;
 		}
 
 	}

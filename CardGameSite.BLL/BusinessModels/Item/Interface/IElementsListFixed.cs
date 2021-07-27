@@ -1,5 +1,7 @@
-namespace Model.Item.Interface {
-	public interface IElementsListFixed<T> : IElements<T>  {
+namespace CardGameSite.BLL.BusinessModels.Item.Interface 
+{
+	public interface IElementsListFixed<T> : IElements<T> 
+	{
 		T This_ { get; set; }
 
 		// method ToArray is inherited from base class

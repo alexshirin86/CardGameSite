@@ -1,11 +1,13 @@
 using System;
 
-namespace Model.Item.Interface {
-	public interface IShip {
-		IModule[] Modules { get; init; }
+namespace CardGameSite.BLL.BusinessModels.Item.Interface
+{
+	public interface IShip
+	{
+		IModule[] Modules { get; }
 		int Attack { get; set; }
-		int Armor { get; init; }
-		int Shield { get; init; }
+		int Armor { get; }
+		int Shield { get; }
 
 		IModule GetModule(int index);
 		bool SetModule(int index, IModule module);

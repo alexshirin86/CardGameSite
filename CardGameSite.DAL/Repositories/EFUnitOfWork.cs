@@ -18,6 +18,7 @@ namespace CardGameSite.DAL.Repositories
         {
             db = new PDbContext(connectionOptions);
         }
+
         public IRepository<Product> Products {
             get {
                 if (productRepository == null)

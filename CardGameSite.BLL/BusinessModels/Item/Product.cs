@@ -1,28 +1,23 @@
-using System;
-using System.Data.Linq.Mapping;
+namespace CardGameSite.BLL.BusinessModels.Item 
+{
 
-namespace Model.Item {
-	[Table(Name = "Product")]
-	public class Product : Element  {
-		[Column]
-		public int GoldCount { get; init; }
-		[Column]
-		private int CrystalCount { get; init; }
+	public class Product : Element 
+	{
+
+		public int GoldCount { get; }
+
+		private int CrystalCount { get; }
 		public int Price { get; }
-		[Column]
-		public override string Name { get; init; }
+		public override string Name { get; set; }
 		private Card[] card;
-		[Column]
-		public override string ImagePath { get; init; }
-		[Column(IsPrimaryKey = true, IsDbGenerated = true)]
-		public override int Id { get; init; }
+		public override string ImagePath { get; }
+		public override int Id { get; }
 
         Product(int id)
         {
 			Id = id;
 
 		}
-
 
 	}
 

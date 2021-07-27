@@ -1,18 +1,19 @@
 using System;
-using Model.Item;
+using CardGameSite.BLL.BusinessModels.Item;
+using CardGameSite.BLL.BusinessModels.Account.Interfaces;
 
-namespace Model.PartyGame {
+namespace CardGameSite.BLL.BusinessModels.PartyGame {
 	[Serializable]
 	public class Player {
-		public Deck<Card> DeckPlayer { get; init; }
-		public Drop<Card> DropPlayer { get; init; }
-		public ContainerFixed<Card> Hand { get; init; }
-		public Container<Card> FieldFleet { get; init; }
-		public Container<Card> FieldSupplyFleet { get; init; }
-		public Interfaces.IAccount AccountPlayer { get; init; }
-		public String Name { get; init; }
+		public Deck<Card> DeckPlayer { get; }
+		public Drop<Card> DropPlayer { get; }
+		public ContainerFixed<Card> Hand { get; }
+		public Container<Card> FieldFleet { get; }
+		public Container<Card> FieldSupplyFleet { get; }
+		public IAccount AccountPlayer { get; }
+		public String Name { get; }
 
-		public Player(Interfaces.IAccount account) {
+		public Player(IAccount account) {
 			AccountPlayer = account;
 			Name = AccountPlayer.Name;
 			DropPlayer =new  Drop<Card>();

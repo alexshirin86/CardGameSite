@@ -1,12 +1,14 @@
 using System;
-using System.Data.Linq;
 
-namespace Model.Item {
+
+namespace CardGameSite.BLL.BusinessModels.Item
+{
 	[Serializable]
-	public abstract class Element: DataContext {
-		public abstract int Id { get; init; }
+	public abstract class Element
+	{
+		public abstract int Id { get; }
 		public abstract string Name { get; set; }
-		public abstract string ImagePath { get; init; }
+		public abstract string ImagePath { get; }
 
 	}
 

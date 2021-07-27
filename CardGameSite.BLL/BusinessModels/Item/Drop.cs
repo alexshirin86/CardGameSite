@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
-using Model.Item.Interface;
-using System.Linq;
+using CardGameSite.BLL.BusinessModels.Item.Interface;
 
-namespace Model.Item {
-	public class Drop<T> : Element , IElementsStack<T>  {
+namespace CardGameSite.BLL.BusinessModels.Item
+{
+	public class Drop<T> : Element , IElementsStack<T>
+	{
 		private Stack<T> _container;
 
-		public override string Name { get; init; }
-		public override string ImagePath { get; init; }
-		public override int Id { get; init; }
+		public override string Name { get; set; }
+		public override string ImagePath { get; }
+		public override int Id { get; }
 		public int Count { get { return _container.Count; } }
 
-		public T Pop() {
+		public T Pop()
+		{
 			try
 			{
 				return _container.Pop();
@@ -23,10 +25,13 @@ namespace Model.Item {
 			}
 		}
 
-		public void Push(T item) {
+		public void Push(T item)
+		{
 			_container.Push(item);
 		}
-		public T Peek() {
+
+		public T Peek() 
+		{
 			try
 			{
 				return _container.Peek();
@@ -37,11 +42,13 @@ namespace Model.Item {
 			}
 		}
 		
-		public bool TryPeek(out T result) {
+		public bool TryPeek(out T result)
+		{
 			return _container.TryPeek(out result);
 		}
 		
-		public bool TryPop(out T result) {
+		public bool TryPop(out T result) 
+		{
 			return _container.TryPop(out result);
 		}
 		
@@ -49,11 +56,13 @@ namespace Model.Item {
 			return _container.GetEnumerator();
 		}
 		
-		public bool Contains(T item) {
+		public bool Contains(T item)
+		{
 			return _container.Contains(item);
 		}
 
-		public void CopyTo(T[] array, int arrayIndex = 0) {
+		public void CopyTo(T[] array, int arrayIndex = 0)
+		{
 			try
 			{
 				_container.CopyTo(array, arrayIndex);
@@ -72,15 +81,18 @@ namespace Model.Item {
 			}
 		}
 
-		public void Clear() {
+		public void Clear()
+		{
 			_container.Clear();
 		}
 
-		public System.Type GetTypeContainer() {
+		public System.Type GetTypeContainer()
+		{
 			return _container.GetType();
 		}
 
-		public T[] ToArray() {
+		public T[] ToArray()
+		{
 			return _container.ToArray();
 		}
 

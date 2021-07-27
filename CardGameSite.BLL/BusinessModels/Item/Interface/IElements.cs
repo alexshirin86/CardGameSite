@@ -1,8 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Model.Item.Interface {
-	public interface IElements<T> {
+namespace CardGameSite.BLL.BusinessModels.Item.Interface
+{
+	public interface IElements<T>
+	{
 		int Count { get; }
 
 		System.Collections.Generic.IEnumerator<T> GetEnumerator();

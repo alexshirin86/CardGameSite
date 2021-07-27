@@ -1,7 +1,8 @@
 using System;
-using Model.Item.Interface;
+using CardGameSite.BLL.BusinessModels.Item.Interface;
 
-namespace Model.PartyGame {
+namespace CardGameSite.BLL.BusinessModels.PartyGame
+{
 	public class ContainerFixed<T> : IElementsListFixed<T>
 	{
 		public T This_ { get; set; }

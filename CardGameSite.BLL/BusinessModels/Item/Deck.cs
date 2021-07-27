@@ -1,29 +1,35 @@
 using System;
 using System.Collections.Generic;
-using Model.Item.Interface;
+using CardGameSite.BLL.BusinessModels.Item.Interface;
 using System.Linq;
 
-namespace Model.Item {
-	public class Deck<T> : Element , IElementsQueue<T>  {
+namespace CardGameSite.BLL.BusinessModels.Item
+{
+	public class Deck<T> : Element , IElementsQueue<T> 
+	{
 		private Queue<T> _container;
 		public int Count { get { return _container.Count; } }
-		public override string Name { get; init; }
-		public override string ImagePath { get; init; }
-		public override int Id { get; init; }
+		public override string Name { get; }
+		public override string ImagePath { get; }
+		public override int Id { get; }
 
 
-		public void Enqueue(T item) {
+		public void Enqueue(T item) 
+		{
 			_container.Enqueue(item);
 		}
 
-		public IEnumerator<T> GetEnumerator() {
+		public IEnumerator<T> GetEnumerator() 
+		{
 			return _container.GetEnumerator();
 		}
 
 		public bool Contains(T item) {
 			return _container.Contains(item);
 		}
-		public T Dequeue() {
+
+		public T Dequeue()
+		{
 			try
             {
 				return _container.Dequeue();
@@ -34,7 +40,8 @@ namespace Model.Item {
             }			
 		}
 
-		public void CopyTo(T[] array, int arrayIndex = 0) {
+		public void CopyTo(T[] array, int arrayIndex = 0)
+		{
 			try
 			{
 				_container.CopyTo(array, arrayIndex);
@@ -53,7 +60,9 @@ namespace Model.Item {
 			}
 
 		}
-		public T Peek() {
+
+		public T Peek() 
+		{
 			try
 			{
 				return _container.Peek();
@@ -63,11 +72,13 @@ namespace Model.Item {
 				return default(T);
 			}
 		}
-		public void Clear() {
+		public void Clear()
+		{
 			_container.Clear();
 		}
 
-		public bool TryPeek(out T item) {
+		public bool TryPeek(out T item) 
+		{
 			return _container.TryPeek(out item);
 		}
 
@@ -75,11 +86,13 @@ namespace Model.Item {
 			return _container.GetType();
 		}
 
-		public T[] ToArray() {
+		public T[] ToArray()
+		{
 			return _container.ToArray();
 		}
 
-		public Deck(T[] arrayItems) {
+		public Deck(T[] arrayItems)
+		{
 			Random rand = new Random();
 			T[] newArrayItems = arrayItems.OrderBy(x => rand.Next()).ToArray();
 				

@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Model.Interfaces;
+using CardGameSite.BLL.BusinessModels.Interfaces;
+using CardGameSite.BLL.BusinessModels.Item;
+using CardGameSite.BLL.BusinessModels.Account.Interfaces;
 
-namespace Model {
+namespace CardGameSite.BLL.BusinessModels
+{
 	public class MarketPlayer : IMarket {
 
 		protected internal Trash _trash;
-		protected internal Model.Trash m_Trash;
 
 		public MarketPlayer(){
 
@@ -18,31 +20,17 @@ namespace Model {
 
             Trash trash = new Trash();
             Account = account;
-            Console.WriteLine("Магазин для игроков");
         }
 
-        public IAccount Account{
-			get;init;
-		}
+        public IAccount Account{ get; }
 
-		public void ShowProducts(){
+		public List<Product> GetProducts()
+		{
 
-			Console.WriteLine("\nВам доступно:");
-			Console.WriteLine("Игровая валюта");
-			Console.WriteLine($"1. Золото {DB.GoldPrice}");
-			Console.WriteLine($"2. Кристал {DB.CrystalPrice}");
-			Console.WriteLine("\n");
-	
-			Console.WriteLine("Предложения для игроков");
-			List<ProductDB> products = DB.GetProductsMarketPlayer();
-	
-			int i = 1;
-			foreach (ProductDB product in products) {
-				Console.WriteLine( $"{i}. {product.Name} {product. Price}. Доступная скидка {Account.Disscount}.");
-				i++;
-			}
-	
-			Console.WriteLine("\n");
+			List<Product> products = DB.GetProductsMarketPlayer();
+
+			return products;
+
 		}
 
 		public void AddInTrash(){

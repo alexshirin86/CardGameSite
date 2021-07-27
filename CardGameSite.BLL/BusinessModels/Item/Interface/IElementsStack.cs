@@ -1,7 +1,7 @@
-using System;
-
-namespace Model.Item.Interface {
-	public interface IElementsStack<T> : IElements<T>  {
+namespace CardGameSite.BLL.BusinessModels.Item.Interface
+{
+	public interface IElementsStack<T> : IElements<T> 
+	{
 		T Pop();
 		void Push(T item);
 		T Peek();

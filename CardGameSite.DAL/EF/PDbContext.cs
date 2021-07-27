@@ -5,7 +5,7 @@ namespace CardGameSite.DAL.EF
 {
     public class PDbContext : DbContext
     {
-        public DbSet<Product> Card { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public PDbContext(DbContextOptions<PDbContext> connectionOptions)

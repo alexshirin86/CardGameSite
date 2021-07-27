@@ -1,20 +1,10 @@
-///////////////////////////////////////////////////////////
-//  Trash.cs
-//  Implementation of the Class Trash
-//  Created on:      31-май-2021 14:09:31
-//  Original author: Aleksey Shirin
-///////////////////////////////////////////////////////////
-
-using System;
+using CardGameSite.BLL.BusinessModels.Item;
 using System.Collections.Generic;
-using Model.Item;
-using System.IO;
 
-
-
-using Model;
-namespace Model {
-	public class Trash {
+namespace CardGameSite.BLL.BusinessModels 
+{
+	public class Trash
+    {
 
 		//private int sum;
 		private List <Product> _products;
@@ -32,9 +22,6 @@ namespace Model {
             get; private set;
         }
 
-        /// <summary>
-        ///   <param name="product"></param>
-        /// </summary>
         public void Add(Product product)
         {
 
@@ -42,9 +29,6 @@ namespace Model {
             Sum += product.Price;
         }
 
-        /// <summary>
-        ///   <param name="product"></param>
-        /// </summary>
         public void Remove(Product product)
         {
 
@@ -58,6 +42,6 @@ namespace Model {
 			Sum = 0;
 		}
 
-	}//end Trash
+	}
 
-}//end namespace Model
+}
