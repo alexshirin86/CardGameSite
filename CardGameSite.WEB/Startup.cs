@@ -23,7 +23,7 @@ namespace CardGameSite.WEB
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            // добавляем контекст MobileContext в качестве сервиса в приложение
+            
             services.AddDbContext<PDBContext>(options =>
                 options.UseSqlServer(connection));
             services.AddControllersWithViews();
