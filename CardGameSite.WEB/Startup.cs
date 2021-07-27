@@ -25,6 +25,11 @@ namespace CardGameSite.WEB
             services.AddDependencyInjection(Configuration);
             
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            // Настройка хранилища данных в памяти.
+            services.AddDistributedMemoryCache();
+            // Регистрирация службы, используемой для доступа к данным се­анса.
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +44,9 @@ namespace CardGameSite.WEB
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            // Автоматическое ассоцииро­вание запросов которые поступают от клиента с сеансами.
+            app.UseSession();
 
             app.UseRouting();
 
