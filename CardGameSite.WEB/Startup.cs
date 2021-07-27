@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CardGameSite.BLL.Services;
-using CardGameSite.BLL.Interfaces;
+using CardGameSite.BLL.Infrastructure;
 using System;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace CardGameSite.WEB
 {
@@ -22,13 +21,10 @@ namespace CardGameSite.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
             
-            services.AddDbContext<PDBContext>(options =>
-                options.UseSqlServer(connection));
+            services.AddDependencyInjection(Configuration);
+            
             services.AddControllersWithViews();
-            services.AddSingleton<IOrderService, OrderService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
