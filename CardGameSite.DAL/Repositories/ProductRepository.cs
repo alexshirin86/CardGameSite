@@ -46,7 +46,7 @@ namespace CardGameSite.DAL.Repositories
         {
             Product product = db.Products.Find(id);
             if (product != null)
-                db.Products.Remove(book);
+                db.Products.Remove(product);
         }
     }
 }

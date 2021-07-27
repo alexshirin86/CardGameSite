@@ -1,7 +1,6 @@
 ﻿using System;
 using CardGameSite.BLL.DTO;
 using CardGameSite.DAL.Entities;
-using CardGameSite.BLL.BusinessModels;
 using CardGameSite.DAL.Interfaces;
 using CardGameSite.BLL.Infrastructure;
 using CardGameSite.BLL.Interfaces;
@@ -20,19 +19,17 @@ namespace CardGameSite.BLL.Services
         }
         public void MakeOrder(OrderDTO orderDto)
         {
-            Product phone = Database.Products.Get(orderDto.PhoneId);
+            Product product = Database.Products.Get(orderDto.ProductId);
 
-            // валидация
-            if (phone == null)
+            if (product == null)
                 throw new ValidationException("Телефон не найден", "");
-            // применяем скидку
-            decimal sum = new Discount(0.1m).GetDiscountedPrice(phone.Price);
+
             Order order = new Order
             {
                 Date = DateTime.Now,
                 Address = orderDto.Address,
-                PhoneId = phone.Id,
-                Sum = sum,
+                ProductId = product.Id,
+                Sum = product.Price,
                 PhoneNumber = orderDto.PhoneNumber
             };
             Database.Orders.Create(order);

@@ -8,8 +8,8 @@ namespace CardGameSite.DAL.EF
         public DbSet<Product> Card { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public PDbContext(DbContextOptions<PDbContext> connectionString)
-            : base(connectionString)
+        public PDbContext(DbContextOptions<PDbContext> connectionOptions)
+            : base(connectionOptions)
         {
             Database.EnsureCreated();
         }

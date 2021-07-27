@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardGameSite.BLL.Interfaces;
 using CardGameSite.BLL.DTO;
-using CardGameSite.WEB.Models;
 using AutoMapper;
 using CardGameSite.BLL.Infrastructure;
 

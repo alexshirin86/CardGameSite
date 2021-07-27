@@ -14,9 +14,9 @@ namespace CardGameSite.DAL.Repositories
         private ProductRepository productRepository;
         private OrderRepository orderRepository;
 
-        public EFUnitOfWork(string connectionString)
+        public EFUnitOfWork(DbContextOptions<PDbContext> connectionOptions)
         {
-            db = new PDbContext(connectionString);
+            db = new PDbContext(connectionOptions);
         }
         public IRepository<Product> Products {
             get {
