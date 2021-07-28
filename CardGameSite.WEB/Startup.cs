@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CardGameSite.BLL.Infrastructure;
-using System;
+using CardGameSite.WEB.AutoMapper;
+using CardGameSite.BLL.AutoMapper;
+using AutoMapper;
 
 
 namespace CardGameSite.WEB
@@ -30,6 +32,15 @@ namespace CardGameSite.WEB
             services.AddDistributedMemoryCache();
             // Регистрирация службы, используемой для доступа к данным се­анса.
             services.AddSession();
+            // Конфигурация AutoMapper
+            MapperConfiguration mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new WebMapping());  //mapping between Web and Business layer objects
+                cfg.AddProfile(new BllMapping());  // mapping between Business and DB layer objects
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

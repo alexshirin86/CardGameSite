@@ -6,7 +6,7 @@ namespace CardGameSite.WEB.Models
 {
     public class ProductsList
     {
-        public IEnumerable<ProductDTO> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
         public ProductsListPagingInfo PagingInfo { get; set; }
 
         public int CurrentCategory { get; set; }
