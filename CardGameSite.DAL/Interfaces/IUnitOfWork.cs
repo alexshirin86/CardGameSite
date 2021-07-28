@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using CardGameSite.DAL.Entities;
+
 
 namespace CardGameSite.DAL.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork<T> : IDisposable where T: class
     {
-        IRepository<Product> Products { get; }
-        IRepository<Order> Orders { get; }
+        IRepository<T> Repository { get; }
         void Save();
     }
 }

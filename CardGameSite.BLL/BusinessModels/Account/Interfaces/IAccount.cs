@@ -1,3 +1,4 @@
+using CardGameSite.BLL.BusinessModels.Enums;
 
 namespace CardGameSite.BLL.BusinessModels.Account.Interfaces
 {

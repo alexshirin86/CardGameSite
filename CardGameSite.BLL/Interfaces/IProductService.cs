@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace CardGameSite.BLL.Interfaces
 {
-    public interface IOrderService
+    public interface IProductService
     {
-        void MakeOrder(OrderDTO orderDto);
         ProductDTO GetProduct(int? id);
         IEnumerable<ProductDTO> GetProducts();
         void Dispose();

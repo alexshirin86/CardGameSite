@@ -7,11 +7,11 @@ namespace CardGameSite.BLL.BusinessModels.Item
 {
 	public class Deck<T> : Element , IElementsQueue<T> 
 	{
-		private Queue<T> _container;
+		private readonly Queue<T> _container;
+		public override int Id { get; protected set; }
+		public override string Name { get; protected set; }
+		public override string Description { get; protected set; }
 		public int Count { get { return _container.Count; } }
-		public override string Name { get; }
-		public override string ImagePath { get; }
-		public override int Id { get; }
 
 
 		public void Enqueue(T item) 
@@ -30,13 +30,13 @@ namespace CardGameSite.BLL.BusinessModels.Item
 
 		public T Dequeue()
 		{
-			try
+            try
             {
 				return _container.Dequeue();
 			}
-			catch(InvalidOperationException e)
+			catch (InvalidOperationException)
             {
-				return default(T);
+				return default;
             }			
 		}
 
@@ -46,17 +46,17 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				_container.CopyTo(array, arrayIndex);
 			}
-			catch (ArgumentOutOfRangeException e)
+			catch (ArgumentOutOfRangeException)
 			{
 			}
-			catch (ArgumentNullException e)
+			catch (ArgumentNullException)
 			{
 			}
-			catch (ArgumentException e)
+			catch (ArgumentException)
 			{
 			}
-			catch (ArrayTypeMismatchException e)
-			{
+			catch (ArrayTypeMismatchException)
+            {
 			}
 
 		}
@@ -67,22 +67,19 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				return _container.Peek();
 			}	
-			catch (InvalidOperationException e)
-			{
-				return default(T);
+			catch (InvalidOperationException)
+            {
+				return default;
 			}
 		}
-		public void Clear()
-		{
-			_container.Clear();
-		}
+		public void Clear() => _container.Clear();
 
 		public bool TryPeek(out T item) 
 		{
 			return _container.TryPeek(out item);
 		}
 
-		public System.Type GetTypeContainer() {
+		public Type GetTypeContainer() {
 			return _container.GetType();
 		}
 

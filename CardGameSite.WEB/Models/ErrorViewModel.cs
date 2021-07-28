@@ -1,5 +1,6 @@
 using System;
 
+
 namespace CardGameSite.WEB.Models
 {
     public class ErrorViewModel

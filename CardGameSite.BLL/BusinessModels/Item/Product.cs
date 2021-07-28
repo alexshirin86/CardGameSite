@@ -1,3 +1,5 @@
+using CardGameSite.BLL.BusinessModels.Enums;
+
 namespace CardGameSite.BLL.BusinessModels.Item 
 {
 
@@ -6,17 +8,21 @@ namespace CardGameSite.BLL.BusinessModels.Item
 
 		public int GoldCount { get; }
 
-		private int CrystalCount { get; }
-		public int Price { get; }
-		public override string Name { get; set; }
-		private Card[] card;
-		public override string ImagePath { get; }
-		public override int Id { get; }
+		public int CrystalCount { get; }
 
-        Product(int id)
-        {
-			Id = id;
+		private Card[] _card;
+		public override int Id { get; protected set; }
+		public override string Name { get; protected set; }
+		public override string Description { get; protected set; }
+		public decimal Price { get; }
+		public EnumCategoriesProduct Category { get; }
 
+		
+		public Product( int id, string name, string description, decimal price, EnumCategoriesProduct category) : 
+			base(id, name, description)
+		{
+			Price = price;
+			Category = category;
 		}
 
 	}

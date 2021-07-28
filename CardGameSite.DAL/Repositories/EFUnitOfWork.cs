@@ -1,59 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CardGameSite.DAL.Entities;
-using CardGameSite.DAL.EF;
+﻿using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+
 
 namespace CardGameSite.DAL.Repositories
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWork<T> : IUnitOfWork<T> where T : class
     {
-        private PDbContext db;
-        private ProductRepository productRepository;
-        private OrderRepository orderRepository;
+        private PDbContext _db;
+        public IRepository<T> Repository { get; }
+        private bool _disposed = false;
 
-        public EFUnitOfWork(DbContextOptions<PDbContext> connectionOptions)
+        public EFUnitOfWork(DbContextOptions<PDbContext> connectionString, IRepository<T> _repo)
         {
-            db = new PDbContext(connectionOptions);
+            _db = new PDbContext(connectionString);
+            Repository = _repo;
         }
-
-        public IRepository<Product> Products {
-            get {
-                if (productRepository == null)
-                    productRepository = new ProductRepository(db);
-                return productRepository;
-            }
-        }
-
-        public IRepository<Order> Orders {
-            get {
-                if (orderRepository == null)
-                    orderRepository = new OrderRepository(db);
-                return orderRepository;
-            }
-        }
-
+       
         public void Save()
         {
-            db.SaveChanges();
+            _db.SaveChanges();
         }
-
-        private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    db.Dispose();
+                    _db.Dispose();
                 }
-                this.disposed = true;
+                _disposed = true;
             }
         }
-
+        
         public void Dispose()
         {
             Dispose(true);

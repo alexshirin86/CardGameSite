@@ -6,12 +6,21 @@ namespace CardGameSite.BLL.BusinessModels.Item
 {
 	public class Drop<T> : Element , IElementsStack<T>
 	{
-		private Stack<T> _container;
-
-		public override string Name { get; set; }
-		public override string ImagePath { get; }
-		public override int Id { get; }
+		private readonly Stack<T> _container;
+		public override int Id { get; protected set; }
+		public override string Name { get; protected set; }
+		public override string Description { get; protected set; }
 		public int Count { get { return _container.Count; } }
+
+		public Drop(int id, string name, string description) :	base(id, name, description)
+		{
+			_container = new Stack<T>();
+		}
+
+		public Drop()
+		{
+			_container = new Stack<T>();
+		}
 
 		public T Pop()
 		{
@@ -19,9 +28,9 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				return _container.Pop();
 			}	
-			catch (InvalidOperationException e)
+			catch (InvalidOperationException)
 			{
-				return default(T);
+				return default;
 			}
 		}
 
@@ -36,9 +45,9 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				return _container.Peek();
 			}	
-			catch (InvalidOperationException e)
+			catch (InvalidOperationException)
 			{
-				return default(T);
+				return default;
 			}
 		}
 		
@@ -52,7 +61,7 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			return _container.TryPop(out result);
 		}
 		
-		public System.Collections.Generic.IEnumerator<T> GetEnumerator() {
+		public IEnumerator<T> GetEnumerator() {
 			return _container.GetEnumerator();
 		}
 		
@@ -67,16 +76,16 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				_container.CopyTo(array, arrayIndex);
 			}
-			catch (ArgumentOutOfRangeException e)
+			catch (ArgumentOutOfRangeException)
 			{
 			}
-			catch (ArgumentNullException e)
+			catch (ArgumentNullException)
 			{
 			}
-			catch (ArgumentException e)
+			catch (ArgumentException)
 			{
 			}
-			catch (ArrayTypeMismatchException e)
+			catch (ArrayTypeMismatchException)
 			{
 			}
 		}
@@ -86,7 +95,7 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			_container.Clear();
 		}
 
-		public System.Type GetTypeContainer()
+		public Type GetTypeContainer()
 		{
 			return _container.GetType();
 		}

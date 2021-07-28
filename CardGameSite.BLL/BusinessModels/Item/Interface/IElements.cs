@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+
 
 namespace CardGameSite.BLL.BusinessModels.Item.Interface
 {
@@ -7,7 +9,7 @@ namespace CardGameSite.BLL.BusinessModels.Item.Interface
 	{
 		int Count { get; }
 
-		System.Collections.Generic.IEnumerator<T> GetEnumerator();
+		IEnumerator<T> GetEnumerator();
 
 		bool Contains(T item);
 
@@ -15,7 +17,7 @@ namespace CardGameSite.BLL.BusinessModels.Item.Interface
 		
 		void Clear();
 		
-		System.Type GetTypeContainer();
+		Type GetTypeContainer();
 		T[] ToArray();
 
 	}

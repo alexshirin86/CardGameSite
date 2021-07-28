@@ -5,33 +5,31 @@ using CardGameSite.BLL.BusinessModels.Item.Interface;
 namespace CardGameSite.BLL.BusinessModels.Item
 {
 
-	public class MediumShip : Card , IShip 
-	{
-		public IModule[] Modules { get; }		
+    public class MediumShip : Card, IShip
+    {
+		public IModule[] Modules { get; protected set; }		
 
-		public override int Id { get; }
+		public override int Id { get; protected set; }
 
-		public override string Name { get; set; }
+		public override string Name { get; protected set; }
 
-		public override string ImagePath { get; }
+		public override string Description { get; protected set; }
 
-		public override string Description { get; }
+		public int Attack { get; protected set; }
 
-		public int Attack { get; set; }
+		public int Armor { get; protected set; }
 
-		public int Armor { get; }
+		public int Shield { get; protected set; }
 
-		public int Shield { get; }
-
-		public override int Cost { get; }
-
-		public bool? HasModule(int index)
+		public override int Cost { get; protected set; }
+       
+        public bool? HasModule(int index)
 		{
 			try
 			{
-				return Modules[index] != null ? true : false;
+				return Modules[index] != null;
 			}
-			catch (IndexOutOfRangeException e)
+			catch (IndexOutOfRangeException)
 			{
 				return null;
 			}
@@ -43,7 +41,7 @@ namespace CardGameSite.BLL.BusinessModels.Item
 				Modules[index] = module;
 				return true;
 			}
-			catch (IndexOutOfRangeException e)
+			catch (IndexOutOfRangeException)
 			{
 				return false;
 			}
@@ -55,15 +53,24 @@ namespace CardGameSite.BLL.BusinessModels.Item
 			{
 				return Modules[index];
 			}
-			catch (IndexOutOfRangeException e)
+			catch (IndexOutOfRangeException)
 			{
 				return null;
 			}
 		}
 
-		public MediumShip(int id): base(id) 
+		public MediumShip(int id, string name, string description) : base(id, name, description) 
 		{
 			Modules = new IModule[2];
+		}
+
+		public MediumShip(int id, string name, string description, int cost, int attack, int armor, int shield) : base(id, name, description)
+		{
+			Modules = new IModule[2];
+			Cost = cost;
+			Attack = attack;
+			Armor = armor;
+			Shield = shield;
 		}
 
 	}

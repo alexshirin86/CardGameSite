@@ -5,7 +5,7 @@ using System.IO;
 
 
 
-namespace CardGameSite.BLL.BusinessModels.Account 
+namespace CardGameSite.BLL.BusinessModels.Enums 
 {
 	public enum EnumTypeAccount : int 
 	{

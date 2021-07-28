@@ -5,7 +5,7 @@ namespace CardGameSite.BLL.BusinessModels.Item.Interface
 	public interface IShip
 	{
 		IModule[] Modules { get; }
-		int Attack { get; set; }
+		int Attack { get; }
 		int Armor { get; }
 		int Shield { get; }
 

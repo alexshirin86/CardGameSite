@@ -18,7 +18,7 @@ namespace CardGameSite.BLL.BusinessModels
 		{
             			
 			List<Product> productsPlayers = base.GetProducts();
-            List<Product> products = productsPlayers.Union( DB.GetProductsMarketVip() );
+            List<Product> products = productsPlayers.Union( new List<Product>()).ToList<Product>();
 
             return products;
 		}

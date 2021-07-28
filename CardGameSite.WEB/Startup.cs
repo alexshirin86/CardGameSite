@@ -22,7 +22,7 @@ namespace CardGameSite.WEB
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddDependencyInjection(Configuration);
+            services.AddDependencyInjectionBLL(Configuration);
             
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -38,6 +38,7 @@ namespace CardGameSite.WEB
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
             else
             {
@@ -56,7 +57,15 @@ namespace CardGameSite.WEB
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
+
+                endpoints.MapControllerRoute(
+                    name: "store", 
+                    pattern: "{controller=Store}/{action=Store}");
+
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+
             });
         }
     }

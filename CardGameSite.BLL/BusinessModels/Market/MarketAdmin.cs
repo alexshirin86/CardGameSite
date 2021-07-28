@@ -18,7 +18,7 @@ namespace CardGameSite.BLL.BusinessModels
 
 		public List<Product> GetProducts()
 		{
-			List<Product> products = DB.GetProductsMarketAdmin();
+			List<Product> products = new List<Product>();
 
 			return products;
 		}

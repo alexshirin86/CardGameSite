@@ -6,47 +6,53 @@ using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CardGameSite.DAL.Repositories
 {
     public class ProductRepository : IRepository<Product>
     {
-        private PDbContext db;
-
+        private PDbContext _db;
+ 
         public ProductRepository(PDbContext context)
         {
-            this.db = context;
+            _db = context;
+        }
+
+        public ProductRepository(DbContextOptions<PDbContext> connectionOptions)
+        {
+            _db = new PDbContext(connectionOptions);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return db.Products;
+            return _db.Products;
         }
 
         public Product Get(int id)
         {
-            return db.Products.Find(id);
+            return _db.Products.Find(id);
         }
 
         public void Create(Product product)
         {
-            db.Products.Add(product);
+            _db.Products.Add(product);
         }
 
         public void Update(Product product)
         {
-            db.Entry(product).State = EntityState.Modified;
+            _db.Entry(product).State = EntityState.Modified;
         }
 
         public IEnumerable<Product> Find(Func<Product, Boolean> predicate)
         {
-            return db.Products.Where(predicate).ToList();
+            return _db.Products.Where(predicate).ToList();
         }
 
         public void Delete(int id)
         {
-            Product product = db.Products.Find(id);
+            Product product = _db.Products.Find(id);
             if (product != null)
-                db.Products.Remove(product);
+                _db.Products.Remove(product);
         }
     }
 }

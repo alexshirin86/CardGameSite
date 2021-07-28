@@ -6,8 +6,9 @@ namespace CardGameSite.BLL.BusinessModels
 	public class Trash
     {
 
-		//private int sum;
-		private List <Product> _products;
+        public decimal Sum { get; private set; }
+
+        private List <Product> _products;
 
 		public Trash(){
 
@@ -17,10 +18,7 @@ namespace CardGameSite.BLL.BusinessModels
 		public void Pay(){
 
 		}
-
-        public int Sum {
-            get; private set;
-        }
+            
 
         public void Add(Product product)
         {
