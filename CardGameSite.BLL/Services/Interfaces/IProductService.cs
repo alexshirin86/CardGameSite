@@ -6,7 +6,7 @@ namespace CardGameSite.BLL.Interfaces
 {
     public interface IProductService
     {
-        ProductDTO GetProduct(int? id);
+        ProductDTO GetProduct(int? idProduct);
         IEnumerable<ProductDTO> GetProducts();
         void Dispose();
     }

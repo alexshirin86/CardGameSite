@@ -15,8 +15,8 @@ namespace CardGameSite.WEB.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            return View(_service.GetProducts()
-                .Select(x => x.Category)
+            return View( _service.GetProducts()
+                .Select(x => x.Categories)
                 .Distinct()
                 .OrderBy(x => x));
         }

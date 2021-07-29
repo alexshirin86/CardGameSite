@@ -12,12 +12,13 @@ namespace CardGameSite.BLL.Services
     public class ProductService : IProductService
     {
         IUnitOfWork<Product> Database { get; set; }
+
         private IMapper _mapper;
 
 
-        public ProductService(IUnitOfWork<Product> uow, IMapper mapper)
+        public ProductService(IUnitOfWork<Product> puow, IMapper mapper)
         {
-            Database = uow;
+            Database = puow;
             _mapper = mapper;
         }
 
@@ -27,15 +28,15 @@ namespace CardGameSite.BLL.Services
             return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(Database.Repository.GetAll());
         }
 
-        public ProductDTO GetProduct(int? id)
+        public ProductDTO GetProduct(int? idProduct)
         {
-            if (id == null)
+            if (idProduct == null)
                 throw new ValidationException("Не установлено id товара", "");
-            var product = Database.Repository.Get(id.Value);
+            var product = Database.Repository.Get(idProduct.Value);
             if (product == null)
                 throw new ValidationException("Товар не найден", "");
 
-            return new ProductDTO { Id = product.Id, Name = product.Name, Description = product.Description, Price = product.Price, Category = product.Category };
+            return new ProductDTO { Id = product.Id, Name = product.Name, Description = product.Description, Price = product.Price, Categories = _mapper.Map<List<CategoryProduct>, List<CategoryProductDTO>>(product.Categories) };
         }
 
         public void Dispose()

@@ -9,7 +9,10 @@ namespace CardGameSite.WEB.AutoMapper
     {
         public WebMapping()
         {
-            CreateMap<ProductDTO, Product>();            
+            CreateMap<ProductDTO, Product>();
+            CreateMap<CategoryProductDTO, CategoryProduct>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         }
     }
 }

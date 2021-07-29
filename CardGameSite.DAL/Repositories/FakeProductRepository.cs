@@ -10,19 +10,33 @@ namespace CardGameSite.DAL.Repositories
     public class FakeProductRepository : IRepository<Product>
     {
         private List<Product> _products;
+        private List<CategoryProduct> _categoriesProducts;
 
         public FakeProductRepository()
         {
+            _categoriesProducts = new List<CategoryProduct>
+            {
+                new CategoryProduct { Id = 1, Name = "Категория 1" },
+                new CategoryProduct { Id = 2, Name = "Категория 2" },
+                new CategoryProduct { Id = 3, Name = "Категория 3" },
+                new CategoryProduct { Id = 4, Name = "Категория 4" },
+                new CategoryProduct { Id = 5, Name = "Категория 5" },
+                new CategoryProduct { Id = 6, Name = "Категория 6" },
+                new CategoryProduct { Id = 7, Name = "Категория 7" },
+            };
+
             _products = new List<Product>
             {
-                new Product { Id = 1, Name = "Товар 1", Description = "Описание 1", Price = 3.99M, Category = 1},
-                new Product { Id = 2, Name = "Товар 2", Description = "Описание 2", Price = 5.99M, Category = 1},
-                new Product { Id = 3, Name = "Товар 3", Description = "Описание 3", Price = 7.99M, Category = 2},
-                new Product { Id = 4, Name = "Товар 4", Description = "Описание 4", Price = 2.99M, Category = 2},
-                new Product { Id = 5, Name = "Товар 5", Description = "Описание 5", Price = 0.99M, Category = 2},
-                new Product { Id = 6, Name = "Товар 6", Description = "Описание 6", Price = 1.99M, Category = 3},
-                new Product { Id = 7, Name = "Товар 7", Description = "Описание 7", Price = 3.99M, Category = 3},
+                new Product { Id = 1, Name = "Товар 1", Description = "Описание 1", Price = 3.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[1] } },
+                new Product { Id = 2, Name = "Товар 2", Description = "Описание 2", Price = 5.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[1] }},
+                new Product { Id = 3, Name = "Товар 3", Description = "Описание 3", Price = 7.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[2] }},
+                new Product { Id = 4, Name = "Товар 4", Description = "Описание 4", Price = 2.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[2] }},
+                new Product { Id = 5, Name = "Товар 5", Description = "Описание 5", Price = 0.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[2] }},
+                new Product { Id = 6, Name = "Товар 6", Description = "Описание 6", Price = 1.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[3] }},
+                new Product { Id = 7, Name = "Товар 7", Description = "Описание 7", Price = 3.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[3] }},
             };
+
+            
         }
 
         public IEnumerable<Product> GetAll()

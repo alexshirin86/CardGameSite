@@ -1,4 +1,6 @@
-﻿
+﻿using System.Collections.Generic;
+
+
 namespace CardGameSite.BLL.DTO
 {
     public class ProductDTO
@@ -7,6 +9,6 @@ namespace CardGameSite.BLL.DTO
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int Category { get; set; }
+        public List<CategoryProductDTO> Categories { get; set; }
     }
 }

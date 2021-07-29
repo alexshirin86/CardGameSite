@@ -9,6 +9,6 @@ namespace CardGameSite.WEB.Models
         public IEnumerable<Product> Products { get; set; }
         public ProductsListPagingInfo PagingInfo { get; set; }
 
-        public int CurrentCategory { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

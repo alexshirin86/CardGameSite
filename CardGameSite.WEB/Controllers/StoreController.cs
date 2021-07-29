@@ -26,11 +26,11 @@ namespace CardGameSite.WEB.Controllers
 
     }
 
-    public ViewResult Store(int category, int productPage = 1)
+    public ViewResult Store(string category, int productPage = 1)
            => View(new ProductsList
            {
                Products = _productService.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
-                   .Where(p => category == 0 || p.Category == category)
+                   .Where(p => category == null || p.Categories.Where(c => c.Name == category).ToList<CategoryProduct>().Count > 0)
                    .OrderBy(p => p.Id)
                    .Skip((productPage - 1) * PageSize)
                    .Take(PageSize),
@@ -38,10 +38,10 @@ namespace CardGameSite.WEB.Controllers
                {
                    CurrentPage = productPage,
                    ItemsPerPage = PageSize,
-                   TotalItems = category == 0 ?
+                   TotalItems = category == null ?
                         _productService.GetProducts().Count() :
-                        _productService.GetProducts().Where(e =>
-                            e.Category == category).Count()
+                        _productService.GetProducts()
+                            .Select(e => e.Categories.Where(v => v.Name == category)).Count()
                },
                CurrentCategory = category
            });
