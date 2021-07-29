@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using CardGameSite.BLL.Interfaces;
+using CardGameSite.BLL.DTO;
+using AutoMapper;
 
 
 namespace CardGameSite.WEB.Controllers
@@ -12,19 +14,22 @@ namespace CardGameSite.WEB.Controllers
         public int PageSize = 4;
 
         private readonly ILogger<StoreController> _logger;
+        private IMapper _mapper;
 
         private IProductService _productService;
 
-        public StoreController(IProductService serv, ILogger<StoreController> logger)
+        public StoreController(IProductService service, IMapper mapper, ILogger<StoreController> logger)
         {
             _logger = logger;
-            _productService = serv;
-        }
+            _productService = service;
+            _mapper = mapper;
 
-        public ViewResult Store(int category, int productPage = 1)
+    }
+
+    public ViewResult Store(int category, int productPage = 1)
            => View(new ProductsList
            {
-               Products = _productService.GetProducts()
+               Products = _productService.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
                    .Where(p => category == 0 || p.Category == category)
                    .OrderBy(p => p.Id)
                    .Skip((productPage - 1) * PageSize)

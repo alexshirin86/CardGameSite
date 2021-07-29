@@ -5,6 +5,7 @@ using CardGameSite.WEB.Models;
 using CardGameSite.BLL.Interfaces;
 using CardGameSite.BLL.DTO;
 using System.Linq;
+using AutoMapper;
 
 namespace CardGameSite.WEB.Pages
 {
@@ -13,10 +14,12 @@ namespace CardGameSite.WEB.Pages
         private IProductService _service; 
         public Cart Cart { get; set; }
         public string ReturnUrl { get; set; }
+        private IMapper _mapper;
 
-        public CartModel(IProductService service)
+        public CartModel(IProductService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         public void OnGet(string returnUrl)
@@ -27,7 +30,7 @@ namespace CardGameSite.WEB.Pages
 
         public IActionResult OnPost(int productId, string returnUrl)
         {
-            ProductDTO product = _service.GetProducts()
+            Product product = _service.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
                 .FirstOrDefault(p => p.Id == productId);
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(product, 1);

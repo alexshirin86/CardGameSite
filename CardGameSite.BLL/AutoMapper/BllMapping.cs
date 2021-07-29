@@ -8,7 +8,7 @@ namespace CardGameSite.BLL.AutoMapper
     {
         public BllMapping()
         {
-            CreateMap<ProductDTO, Product>();
+            CreateMap<Product, ProductDTO>();
         }        
     }
 }

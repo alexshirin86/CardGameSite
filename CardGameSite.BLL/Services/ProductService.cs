@@ -12,17 +12,19 @@ namespace CardGameSite.BLL.Services
     public class ProductService : IProductService
     {
         IUnitOfWork<Product> Database { get; set; }
+        private IMapper _mapper;
 
-        public ProductService(IUnitOfWork<Product> uow)
+
+        public ProductService(IUnitOfWork<Product> uow, IMapper mapper)
         {
             Database = uow;
+            _mapper = mapper;
         }
 
         public IEnumerable<ProductDTO> GetProducts()
         {
-            // применяем автомаппер для проекции одной коллекции на другую
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Repository.GetAll());
+
+            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(Database.Repository.GetAll());
         }
 
         public ProductDTO GetProduct(int? id)
