@@ -27,7 +27,7 @@ namespace CardGameSite.DAL.Repositories
 
             _products = new List<Product>
             {
-                new Product { Id = 1, Name = "Товар 1", Description = "Описание 1", Price = 3.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[1] } },
+                new Product { Id = 1, Name = "Товар 1", Description = "Описание 1", Price = 3.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[1] }},
                 new Product { Id = 2, Name = "Товар 2", Description = "Описание 2", Price = 5.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[1] }},
                 new Product { Id = 3, Name = "Товар 3", Description = "Описание 3", Price = 7.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[2] }},
                 new Product { Id = 4, Name = "Товар 4", Description = "Описание 4", Price = 2.99M, Categories = new List<CategoryProduct>{ _categoriesProducts[2] }},
