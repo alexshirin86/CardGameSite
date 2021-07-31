@@ -31,7 +31,7 @@ namespace CardGameSite.WEB.Pages
         public IActionResult OnPost(int productId, string returnUrl)
         {
             Product product = _service.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
-                .FirstOrDefault(p => p.Id == productId);
+                .FirstOrDefault(p => p.ProductId == productId);
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(product, 1);
             HttpContext.Session.SetJson("cart", Cart);

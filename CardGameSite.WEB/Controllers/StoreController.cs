@@ -31,7 +31,7 @@ namespace CardGameSite.WEB.Controllers
            {
                Products = _productService.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
                    .Where(p => category == null || p.Categories.Where(c => c.Name == category).ToList<CategoryProduct>().Count > 0)
-                   .OrderBy(p => p.Id)
+                   .OrderBy(p => p.ProductId)
                    .Skip((productPage - 1) * PageSize)
                    .Take(PageSize),
                PagingInfo = new ProductsListPagingInfo
