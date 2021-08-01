@@ -1,11 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using CardGameSite.BLL.Infrastructure;
 using CardGameSite.WEB.AutoMapper;
 using CardGameSite.BLL.AutoMapper;
+using CardGameSite.WEB.Models;
 using AutoMapper;
 
 
@@ -32,6 +39,8 @@ namespace CardGameSite.WEB
             services.AddDistributedMemoryCache();
             // Регистрирация службы, используемой для доступа к данным се­анса.
             services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Конфигурация AutoMapper
             MapperConfiguration mapperConfig = new MapperConfiguration(cfg =>
             {
