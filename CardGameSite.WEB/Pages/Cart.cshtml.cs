@@ -16,25 +16,30 @@ namespace CardGameSite.WEB.Pages
         public string ReturnUrl { get; set; }
         private IMapper _mapper;
 
-        public CartModel(IProductService service, IMapper mapper)
+        public CartModel(IProductService service, Cart cartService, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
+            Cart = cartService;
         }
 
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
         public IActionResult OnPost(int productId, string returnUrl)
         {
             Product product = _service.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
                 .FirstOrDefault(p => p.ProductId == productId);
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(product, 1);
-            HttpContext.Session.SetJson("cart", Cart);
+            return RedirectToPage(new { returnUrl = returnUrl });
+        }
+
+        public IActionResult OnPostRemove(int productId, string returnUrl)
+        {
+            Cart.RemoveLine(Cart.Lines.First(cl =>
+                cl.Product.ProductId == productId).Product);
             return RedirectToPage(new { returnUrl = returnUrl });
         }
     }
