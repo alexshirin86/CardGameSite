@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using CardGameSite.BLL.Interfaces;
+using CardGameSite.BLL.Services.Interfaces;
 using CardGameSite.BLL.DTO;
 using AutoMapper;
 using CardGameSite.BLL.Infrastructure;

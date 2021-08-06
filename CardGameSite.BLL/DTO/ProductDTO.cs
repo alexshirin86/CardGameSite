@@ -9,6 +9,6 @@ namespace CardGameSite.BLL.DTO
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public List<CategoryProductDTO> Categories { get; set; }
+        public IEnumerable<CategoryProductDTO> CategoriesProduct { get; set; }
     }
 }

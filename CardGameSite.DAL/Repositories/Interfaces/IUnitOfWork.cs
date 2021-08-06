@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace CardGameSite.DAL.Interfaces
+namespace CardGameSite.DAL.Repositories.Interfaces
 {
     public interface IUnitOfWork<T> : IDisposable where T: class
     {

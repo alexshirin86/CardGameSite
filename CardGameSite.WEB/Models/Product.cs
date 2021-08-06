@@ -11,6 +11,6 @@ namespace CardGameSite.WEB.Models
         
         [Column(TypeName = "decimal(8, 2)")]
         public decimal Price { get; set; }
-        public List<CategoryProduct> Categories { get; set; }
+        public List<CategoryProduct> CategoriesProduct { get; set; }
     }
 }

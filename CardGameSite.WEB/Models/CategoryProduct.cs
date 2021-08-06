@@ -7,7 +7,9 @@ namespace CardGameSite.WEB.Models
 {
     public class CategoryProduct
     {
-        public int Id { get; set; }
+        public int CategoryProductId { get; set; }
         public string Name { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }

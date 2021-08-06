@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using CardGameSite.WEB.Infrastructure;
 using CardGameSite.WEB.Models;
-using CardGameSite.BLL.Interfaces;
+using CardGameSite.BLL.Services.Interfaces;
 using CardGameSite.BLL.DTO;
 using System.Linq;
 using AutoMapper;
@@ -11,12 +11,12 @@ namespace CardGameSite.WEB.Pages
 {
     public class CartModel : PageModel
     {
-        private IProductService _service; 
+        private IService<ProductDTO> _service; 
         public Cart Cart { get; set; }
         public string ReturnUrl { get; set; }
         private IMapper _mapper;
 
-        public CartModel(IProductService service, Cart cartService, IMapper mapper)
+        public CartModel(IService<ProductDTO> service, Cart cartService, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -30,7 +30,7 @@ namespace CardGameSite.WEB.Pages
 
         public IActionResult OnPost(int productId, string returnUrl)
         {
-            Product product = _service.GetProducts().Select(p => _mapper.Map<ProductDTO, Product>(p))
+            Product product = _service.GetObjectsDto().Select(p => _mapper.Map<ProductDTO, Product>(p))
                 .FirstOrDefault(p => p.ProductId == productId);
             Cart.AddItem(product, 1);
             return RedirectToPage(new { returnUrl = returnUrl });

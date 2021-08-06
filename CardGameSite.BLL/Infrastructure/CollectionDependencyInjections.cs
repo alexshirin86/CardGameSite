@@ -1,8 +1,10 @@
-﻿using CardGameSite.BLL.Interfaces;
+﻿using CardGameSite.BLL.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CardGameSite.BLL.Services;
 using CardGameSite.DAL.Infrastructure;
+using CardGameSite.DAL.Entities;
+using CardGameSite.BLL.DTO;
+using CardGameSite.BLL.Services.Implementations;
 
 
 namespace CardGameSite.BLL.Infrastructure
@@ -11,7 +13,8 @@ namespace CardGameSite.BLL.Infrastructure
     {
         public static IServiceCollection AddDependencyInjectionBLL(this IServiceCollection services, IConfiguration config)
         {            
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IService<ProductDTO>, Service<Product, ProductDTO>>();
+            services.AddScoped<IService<CategoryProductDTO>, Service<CategoryProduct, CategoryProductDTO>>();
             services.AddDependencyInjectionDAL(config);
             return services;
         }

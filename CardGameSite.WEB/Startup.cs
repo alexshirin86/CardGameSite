@@ -30,9 +30,7 @@ namespace CardGameSite.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDependencyInjectionBLL(Configuration);
-            
+                       
             services.AddControllersWithViews();
             services.AddRazorPages();
             // Настройка хранилища данных в памяти.
@@ -50,6 +48,7 @@ namespace CardGameSite.WEB
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddDependencyInjectionBLL(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +70,7 @@ namespace CardGameSite.WEB
 
             app.UseRouting();
 
+            //app.UseAuthentication();
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

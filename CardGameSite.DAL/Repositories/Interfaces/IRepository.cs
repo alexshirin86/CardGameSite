@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace CardGameSite.DAL.Interfaces
+namespace CardGameSite.DAL.Repositories.Interfaces
 {
     public interface IRepository<T> where T : class
     {

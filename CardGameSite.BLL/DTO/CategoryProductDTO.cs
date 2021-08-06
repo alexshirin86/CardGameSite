@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 
 namespace CardGameSite.BLL.DTO
 {
@@ -8,7 +7,6 @@ namespace CardGameSite.BLL.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ProductId { get; set; }
-        public ProductDTO Product { get; set; }
+        public IEnumerable<ProductDTO> Products { get; set; }
     }
 }
