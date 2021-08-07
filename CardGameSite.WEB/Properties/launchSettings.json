@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "sqlDebugging": true,
-      "nativeDebugging": true
+      "nativeDebugging": false
     },
     "CardGameSite.WEB": {
       "commandName": "Project",

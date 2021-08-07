@@ -27,6 +27,7 @@ namespace CardGameSite.DAL.Repositories.Implementations
 
             };
             _db = new SiteDbContext(contextOptions);
+
             _setT = (DbSet<T>)typeof(SiteDbContext).GetProperty(_setsDbContext[typeof(T).Name]).GetValue(_db);
         }
 

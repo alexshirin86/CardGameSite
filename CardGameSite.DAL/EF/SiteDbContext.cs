@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CardGameSite.DAL.Entities;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 
 namespace CardGameSite.DAL.EF
 {
-    public class SiteDbContext : DbContext
+    public class SiteDbContext : IdentityDbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<CategoryProduct> CategoriesProduct { get; set; }
@@ -14,7 +15,8 @@ namespace CardGameSite.DAL.EF
         public SiteDbContext(DbContextOptions<SiteDbContext> options)
             : base(options)
         {
-            Database.Migrate();
+            Database.EnsureDeleted();
+            //Database.Migrate();
         }
 
         
