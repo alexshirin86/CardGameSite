@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +10,7 @@ using CardGameSite.WEB.AutoMapper;
 using CardGameSite.BLL.AutoMapper;
 using CardGameSite.WEB.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace CardGameSite.WEB
@@ -48,11 +45,10 @@ namespace CardGameSite.WEB
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-            services.AddDependencyInjectionBLL(Configuration);
-
+            
             // добавление сервисов Idenity
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //            .AddEntityFrameworkStores<ApplicationDbContext>();
+            IdentityBuilder identityBuilder = services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+            services.AddDependencyInjectionBLL(Configuration, identityBuilder);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,8 +70,8 @@ namespace CardGameSite.WEB
 
             app.UseRouting();
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

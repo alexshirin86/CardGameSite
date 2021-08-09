@@ -15,8 +15,7 @@ namespace CardGameSite.DAL.EF
         public SiteDbContext(DbContextOptions<SiteDbContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
-            //Database.Migrate();
+            Database.Migrate();
         }
 
         
