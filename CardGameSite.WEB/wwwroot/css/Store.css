@@ -1,0 +1,37 @@
+﻿.store-container {
+    position:absolute;
+    top:13%;
+    width:100%;
+    height:100%;
+}
+.btn.btn-sm.btn-secondary.navbar-btn{
+    width: 7em;
+}
+a.btn-store {
+    width: 15em;
+    margin: 0.5em;
+    position: absolute;
+    font-size: 1.5em;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: rgba(255,255,255,.5) 1px 1px, rgba(100,100,100,.3) 3px 7px 3px;
+    user-select: none;
+    /*border-radius: 3px / 100%;*/
+    background-image: linear-gradient(45deg, rgb(67 166 255 / 0%) 30%, rgb(62 193 255 / 80%), rgb(130 213 251 / 0%) 70%), linear-gradient(to right, rgb(32 92 136), rgba(255,255,255,0) 20%, rgb(53 144 255 / 0%) 90%, rgb(34 100 181 / 30%)), linear-gradient(to right, rgb(125 125 125), rgb(72 196 255 / 90%) 45%, rgb(90 119 154 / 50%)), linear-gradient(to right, rgba(125,125,125,1), rgb(162 212 255 / 90%) 45%, rgb(48 76 146 / 50%)), linear-gradient(to right, rgb(32 43 103), rgb(85 163 255 / 90%) 45%, rgb(170 184 223 / 50%)), linear-gradient(to right, rgb(12 58 115), rgb(83 150 234 / 90%) 45%, rgb(30 43 66 / 50%));
+    background-repeat: no-repeat;
+    background-size: 200% 100%, auto, 1% 1px, 1% 2px, 1% 1px, 1% 1px;
+    background-position: 300% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+    box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+}
+
+    a.btn-store:hover {
+        transition: .5s linear;
+        background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+    }
+
+    a.btn-store:active {
+        top: 1px;
+    }
+

@@ -63,13 +63,19 @@ body {
     margin-bottom: 60px;
     background-color: #0f1418;
 }
-.footer
-{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: rgb(0 0 0 / 0,00) !important;
+    background-image: url(/img/footer.png);
+    background-size: contain;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    color: white !important;
+    text-align: center;
 }
 
 .container 
@@ -152,3 +158,5 @@ a.nav-link {
     a.nav-link:active {
         top: 1px;
     }
+
+

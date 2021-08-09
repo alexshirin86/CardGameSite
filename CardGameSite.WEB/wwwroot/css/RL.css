@@ -1,0 +1,26 @@
+﻿.rl-container {
+    position:absolute;
+    top: 13%;
+    color: white !important;
+    justify-content:center;
+    width:100%;
+    height:80%;
+}
+.rl-section {
+    top: 10%;
+    position: absolute;
+    width: 120%;
+    left: -10%;
+}
+.btn-submit {
+    border-radius: 0px;
+    background-color: #25313c;
+    border-color: #25313c;
+    width: 30%;
+}
+.form-submit{
+    text-align:center;
+}
+a {
+    color: #60819f;
+}

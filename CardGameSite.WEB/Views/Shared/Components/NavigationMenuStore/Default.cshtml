@@ -1,11 +1,11 @@
 ﻿@model List<string>
-<a class="btn btn-block btn-outline-secondary" asp-action="Store"
+<a class="btn-store" asp-action="Store"
    asp-controller="Store" asp-route-category="">
    Store
 </a>
 @foreach (string category in Model)
 {
-    <a class="btn btn-block
+    <a class="btn-store
        @(category == ViewBag.SelectedCategory
            ? "btn-primary": "btn-outline-secondary")"
        asp-action="Store" asp-controller="Store"
