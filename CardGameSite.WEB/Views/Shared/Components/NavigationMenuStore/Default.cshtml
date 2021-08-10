@@ -1,16 +1,22 @@
 ﻿@model List<string>
-<a class="btn-store" asp-action="Store"
-   asp-controller="Store" asp-route-category="">
-   Store
-</a>
-@foreach (string category in Model)
-{
-    <a class="btn-store
-       @(category == ViewBag.SelectedCategory
-           ? "btn-primary": "btn-outline-secondary")"
-       asp-action="Store" asp-controller="Store"
-       asp-route-category="@category"
-       asp-route-productPage="1">
-        @category
-    </a>
-}
+<ul class="ul-category">
+    <li class="li-category">
+        <a class="btn-store" asp-action="Store"
+           asp-controller="Store" asp-route-category="">
+            Store
+        </a>
+    </li>
+    @foreach (string category in Model)
+    {
+        <li class="li-category">
+            <a class="btn-store"
+               
+               asp-action="Store" asp-controller="Store"
+               asp-route-category="@category"
+               asp-route-productPage="1">
+                @category
+            </a>
+        </li>
+    }
+
+    </ul>

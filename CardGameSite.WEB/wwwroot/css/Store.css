@@ -2,13 +2,29 @@
     position:absolute;
     top:13%;
     width:100%;
-    height:100%;
+    
 }
-.btn.btn-sm.btn-secondary.navbar-btn{
+.cart-container {
+    color: white;
+}
+.cart-table {
+    color: white;
+}
+.btn.btn-sm.btn-secondary.navbar-btn {
     width: 7em;
 }
+.li-category {
+    line-height: 2.5em;
+    padding-bottom: 4em;
+}
+.ul-category {
+    list-style-type: none;
+    min-height: 100%;
+    padding-left: 1em;
+}
 a.btn-store {
-    width: 15em;
+    width: 90%;
+    left: 10%;
     margin: 0.5em;
     position: absolute;
     font-size: 1.5em;
@@ -30,8 +46,9 @@ a.btn-store {
         transition: .5s linear;
         background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
     }
-
     a.btn-store:active {
-        top: 1px;
+        width: 100%;
+        left: 0;
     }
+   
 

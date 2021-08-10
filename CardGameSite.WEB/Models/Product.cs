@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CardGameSite.WEB.Models
 {
@@ -11,6 +12,7 @@ namespace CardGameSite.WEB.Models
         
         [Column(TypeName = "decimal(8, 2)")]
         public decimal Price { get; set; }
+        [JsonIgnore]
         public List<CategoryProduct> CategoriesProduct { get; set; }
     }
 }

@@ -33,8 +33,6 @@ namespace CardGameSite.DAL.Repositories.Implementations
 
         public IEnumerable<T> GetAll()
         {
-           //_db.Products.Include(c => c.CategoriesProduct).ToList();
-
             return _setT;
         }
 
