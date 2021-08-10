@@ -27,7 +27,6 @@ namespace CardGameSite.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-                       
             services.AddControllersWithViews();
             services.AddRazorPages();
             // Настройка хранилища данных в памяти.
@@ -36,6 +35,8 @@ namespace CardGameSite.WEB
             services.AddSession();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                   
+
             // Конфигурация AutoMapper
             MapperConfiguration mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -45,10 +46,16 @@ namespace CardGameSite.WEB
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-            
-            // добавление сервисов Idenity
-            IdentityBuilder identityBuilder = services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
-            services.AddDependencyInjectionBLL(Configuration, identityBuilder);
+                        
+            services.AddIdentity<User, IdentityRole<int>>(
+                options =>
+                {
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                }).AddDependencyInjectionIdentityBuilder();
+
+            // зависимости            
+            services.AddDependencyInjectionServiceCollection(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +82,9 @@ namespace CardGameSite.WEB
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
+
                 endpoints.MapControllerRoute("catpage",
                     "{category}/Page{productPage:int}",
                     new { Controller = "Store", action = "Store" });
@@ -85,16 +95,16 @@ namespace CardGameSite.WEB
                 endpoints.MapControllerRoute("pagination",
                     "Products/Page{productPage}",
                     new { Controller = "Store", action = "Store", productPage = 1 });
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                
+                
 
                 endpoints.MapControllerRoute(
                     name: "store", 
                     pattern: "{controller=Store}/{action=Store}");
 
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "admin",
+                    pattern: "{controller=Admin}/{action=Index}");
 
             });
         }

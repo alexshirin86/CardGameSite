@@ -1,21 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CardGameSite.DAL.Entities;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 
 namespace CardGameSite.DAL.EF
 {
-    public class SiteDbContext : IdentityDbContext
+    public class SiteDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<CategoryProduct> CategoriesProduct { get; set; }
 
-        public SiteDbContext(DbContextOptions<SiteDbContext> options)
+        public SiteDbContext() { }
+
+        public SiteDbContext(DbContextOptions options)
             : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         
@@ -25,7 +27,7 @@ namespace CardGameSite.DAL.EF
 
             base.OnConfiguring(optionsBuilder);
         }
-        
+
         /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +50,6 @@ namespace CardGameSite.DAL.EF
                         .OnDelete(DeleteBehavior.ClientCascade));
                             
         }*/
-        
+
     }
 }

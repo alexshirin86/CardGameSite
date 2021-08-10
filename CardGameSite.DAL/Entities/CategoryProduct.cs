@@ -1,13 +1,14 @@
-﻿using System;
+﻿using CardGameSite.DAL.Entities.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
 namespace CardGameSite.DAL.Entities
 {
-    public class CategoryProduct
+    public class CategoryProduct : IEntity
     {
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 

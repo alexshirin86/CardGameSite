@@ -29,11 +29,9 @@ namespace CardGameSite.WEB.Pages
         }
 
         public IActionResult OnPost(int productId, string returnUrl)
-        {
-            System.Diagnostics.Debug.WriteLine("OnPost productId= " + productId.ToString());
+        {            
             Product product = _service.GetObjectsDto().Select(p => _mapper.Map<ProductDTO, Product>(p))
-                .FirstOrDefault(p => p.ProductId == productId);
-            System.Diagnostics.Debug.WriteLine("OnPost Product.ProductId= " + product.ProductId.ToString());
+                .FirstOrDefault(p => p.ProductId == productId);            
             Cart.AddItem(product, 1);
             return RedirectToPage(new { returnUrl = returnUrl });
         }

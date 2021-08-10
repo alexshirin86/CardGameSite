@@ -6,7 +6,6 @@ using CardGameSite.DAL.Repositories.Interfaces;
 using CardGameSite.DAL.Repositories.Implementations;
 using CardGameSite.DAL.Entities;
 using CardGameSite.DAL.Repositories;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -14,21 +13,28 @@ namespace CardGameSite.DAL.Infrastructure
 {
     public static class CollectionDependencyInjections
     {
-        public static IServiceCollection AddDependencyInjectionDAL(this IServiceCollection services, IConfiguration config, IdentityBuilder identityBuilder)
+        public static IServiceCollection AddDependencyInjectionServiceCollection(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IUnitOfWork<Product>, UnitOfWork<Product>>();
             services.AddScoped<IUnitOfWork<CategoryProduct>, UnitOfWork<CategoryProduct>>();
+            services.AddScoped<IUnitOfWork<User>, UnitOfWork<User>>();
+
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IRepository<CategoryProduct>, Repository<CategoryProduct>>();
+            services.AddScoped<IRepository<User>, Repository<User>>();
 
             services.AddDbContext<SiteDbContext>(options =>
                 options.UseSqlServer(
                    config.GetConnectionString("DefaultConnection")));
 
-            // добавление сервисов Idenity
-            identityBuilder.AddEntityFrameworkStores<SiteDbContext>();
-
             return services;
+        }
+
+        public static IdentityBuilder AddDependencyInjectionIdentityBuilder(this IdentityBuilder builder)
+        {
+            builder.AddEntityFrameworkStores<SiteDbContext>().AddDefaultUI();
+
+            return builder;
         }
     }
 }

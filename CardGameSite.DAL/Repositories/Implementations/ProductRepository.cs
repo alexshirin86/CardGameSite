@@ -12,9 +12,9 @@ namespace CardGameSite.DAL.Repositories.Implementations
     public class ProductRepository : Repository<Product>
     {
 
-        public ProductRepository(DbContextOptions<SiteDbContext> connectionOptions) : base(connectionOptions) 
+        public ProductRepository(SiteDbContext context) : base(context) 
         {
-            _db.Products.Include(c => c.CategoriesProduct).ToList();
+            _context.Products.Include(c => c.CategoriesProduct).ToList();
         }
                 
     }

@@ -12,12 +12,18 @@ namespace CardGameSite.BLL.Infrastructure
 {
     public static class CollectionDependencyInjections
     {
-        public static IServiceCollection AddDependencyInjectionBLL(this IServiceCollection services, IConfiguration config, IdentityBuilder identityBuilder)
+        public static IServiceCollection AddDependencyInjectionServiceCollection(this IServiceCollection services, IConfiguration config)
         {            
             services.AddScoped<IService<ProductDTO>, Service<Product, ProductDTO>>();
             services.AddScoped<IService<CategoryProductDTO>, Service<CategoryProduct, CategoryProductDTO>>();
-            services.AddDependencyInjectionDAL(config, identityBuilder);
-            return services;
+            services.AddScoped<IService<UserDTO>, Service<User, UserDTO>>();
+
+            return DAL.Infrastructure.CollectionDependencyInjections.AddDependencyInjectionServiceCollection(services, config);
+        }
+
+        public static IdentityBuilder AddDependencyInjectionIdentityBuilder(this IdentityBuilder builder)
+        {
+            return DAL.Infrastructure.CollectionDependencyInjections.AddDependencyInjectionIdentityBuilder(builder);
         }
     }
 }

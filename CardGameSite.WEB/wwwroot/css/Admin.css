@@ -1,0 +1,29 @@
+﻿.admin-container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.temp-data {
+    top: 13%;
+    position: absolute;
+    width: auto;
+    left: 5%;
+    right: 5%;
+}
+
+.admin-edit-container {
+    width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+label{
+    color:white;
+}
+
+.admin-table {
+    color: white;
+}

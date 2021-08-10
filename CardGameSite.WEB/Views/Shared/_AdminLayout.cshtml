@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "_ValidationScriptsPartial";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" asp-href-include="liЬ/bootstrap/dist/css/*.min.css" />
+    <link rel="stylesheet" asp-href-include="~/css/admin.css" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    
+</head>
+<body class="m-1 p-1">
+        @if (TempData["message"] != null)
+        {
+            <div class="temp-data alert alert-success">@TempData["message"]</div>
+        }    
+        @RenderBody()    
+</body>
+</html>
+

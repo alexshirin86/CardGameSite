@@ -1,36 +1,38 @@
-﻿using CardGameSite.DAL.Entities;
+﻿using CardGameSite.DAL.Entities.Interfaces;
 using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+
 using System;
 
 
 namespace CardGameSite.DAL.Repositories
 {
-    public class UnitOfWork<T> : IUnitOfWork<T> where T : class
+    public class UnitOfWork<T> : IUnitOfWork<T> where T : class, IEntity
     {
-        private SiteDbContext _db;
+        private SiteDbContext _context;
         public IRepository<T> Repository { get; }
         private bool _disposed = false;
 
-        public UnitOfWork(DbContextOptions<SiteDbContext> contextOptions, IRepository<T> _repo)
+        public UnitOfWork(SiteDbContext context, IRepository<T> _repo)
         {
-            _db = new SiteDbContext(contextOptions);
+            _context = context;
             Repository = _repo;
         }
        
         public void Save()
         {
-            _db.SaveChanges();
+            //System.Diagnostics.Debug.WriteLine("Save is " + _context.SaveChanges());
+            _context.SaveChanges();
         }
 
+        
         public virtual void Dispose(bool disposing)
         {
             if (!_disposed)
             {
                 if (disposing)
                 {
-                    _db.Dispose();
+                    _context.Dispose();
                 }
                 _disposed = true;
             }

@@ -3,10 +3,14 @@
 
 namespace CardGameSite.BLL.Services.Interfaces
 {
-    public interface IService<T> where T : class
+    public interface IService<classDTO> where classDTO : class
     {
-        T GetObjectDto(int? idT);
-        IEnumerable<T> GetObjectsDto();
+        classDTO GetObjectDto(int? idClassDTO);
+        IEnumerable<classDTO> GetObjectsDto();
+
+        void SaveObject(classDTO obj);
+
+        classDTO DeleteObject(int idClassDTO);
         void Dispose();
     }
 }

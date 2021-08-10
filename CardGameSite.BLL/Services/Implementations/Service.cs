@@ -2,44 +2,71 @@
 using CardGameSite.BLL.Infrastructure;
 using CardGameSite.BLL.Services.Interfaces;
 using System.Collections.Generic;
+using CardGameSite.BLL.DTO.Interfaces;
 using AutoMapper;
 
 
 namespace CardGameSite.BLL.Services.Implementations
 {
-    class Service<T, DTO> : IService<DTO> where T : class where DTO : class
+    class Service<T, DTO> : IService<DTO> where T : class where DTO : class, IDto
     {
-        IUnitOfWork<T> Database { get; set; }
+        private IUnitOfWork<T> _uow;
 
         private IMapper _mapper;
 
 
         public Service(IUnitOfWork<T> uow, IMapper mapper)
         {
-            Database = uow;
+            _uow = uow;
             _mapper = mapper;
         }
 
         public IEnumerable<DTO> GetObjectsDto()
         {
 
-            return _mapper.Map<IEnumerable<T>, IEnumerable<DTO>>(Database.Repository.GetAll());
+            return _mapper.Map<IEnumerable<T>, IEnumerable<DTO>>(_uow.Repository.GetAll());
         }
 
-        public DTO GetObjectDto(int? idT)
+        public DTO GetObjectDto(int? idClassDTO)
         {
-            if (idT == null)
+            if (idClassDTO == null)
                 throw new ValidationException("Не установлено id", "");
-            var obj = Database.Repository.Get(idT.Value);
+            var obj = _uow.Repository.Get(idClassDTO.Value);
             if (obj == null)
                 throw new ValidationException("Объект не найден", "");
 
             return _mapper.Map<T, DTO>(obj);            
         }
 
+        public void SaveObject(DTO obj)
+        {
+            T objT = _mapper.Map<DTO, T>(obj);
+
+            if (obj.Id == 0)
+            {
+                _uow.Repository.Create(objT);
+            }
+            else
+            {
+                _uow.Repository.Update(objT);
+            }
+
+            _uow.Save();
+        }
+
+        public DTO DeleteObject(int idClassDTO)
+        {            
+            T obj = _uow.Repository.Delete(idClassDTO);
+
+            if (obj != null)
+                _uow.Save();
+
+            return _mapper.Map<T, DTO>(obj);
+        }
+
         public void Dispose()
         {
-            Database.Dispose();
+            _uow.Dispose();
         }
     }
 }

@@ -9,20 +9,14 @@ namespace CardGameSite.BLL.AutoMapper
         public BllMapping()
         {
             CreateMap<Product, ProductDTO>();
-                //.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                //.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                //.ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-                //.ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
-                //.AfterMap((src, dest) => {
-                //    foreach (var c in dest.Categories)
-                //    {
-                //        c.ProductId = src.Id;
-                //    }
-           // });
+            CreateMap<ProductDTO, Product>();
 
-            CreateMap<CategoryProduct, CategoryProductDTO>();
-                //.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id))
-                //.ForMember(dest => dest.Product, opt => opt.MapFrom(src => src)); ;
-        }        
+            CreateMap<CategoryProduct, CategoryProductDTO>(); 
+            CreateMap<CategoryProductDTO, CategoryProduct>();
+
+            CreateMap<UserDTO, User>();
+            CreateMap<User, UserDTO>();
+
+        }
     }
 }

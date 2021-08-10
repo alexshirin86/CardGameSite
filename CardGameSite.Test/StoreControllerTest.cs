@@ -38,7 +38,7 @@ namespace CardGameSite.Test
             Assert.AreEqual("P5", prodArray[1].Name);
         }
     }
-    public class FakeRepository : IRepository<Product>
+    public class FakeRepository 
     {
         private List<Product> _products;
         private List<CategoryProduct> _categoriesProducts;
