@@ -1,8 +1,7 @@
 ﻿using CardGameSite.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using CardGameSite.BLL.Infrastructure;
 using System.Linq;
-using CardGameSite.BLL.Services.Interfaces;
 using CardGameSite.BLL.DTO;
 using AutoMapper;
 
@@ -13,15 +12,13 @@ namespace CardGameSite.WEB.Controllers
     {
         public int PageSize = 4;
 
-        private readonly ILogger<StoreController> _logger;
         private IMapper _mapper;
 
-        private IService<ProductDTO> _productService;
+        private DataManagerServices _dataManager;
 
-        public StoreController(IService<ProductDTO> service, IMapper mapper, ILogger<StoreController> logger)
+        public StoreController(DataManagerServices dataManager, IMapper mapper)
         {
-            _logger = logger;
-            _productService = service;
+            _dataManager = dataManager;
             _mapper = mapper;
         }
 
@@ -30,7 +27,7 @@ namespace CardGameSite.WEB.Controllers
             
             ProductsList productList = new ProductsList()
             {
-                Products = _productService.GetObjectsDto()                   
+                Products = _dataManager.ProductService.GetObjectsDto()                   
                    .Select(p => _mapper.Map<ProductDTO, Product>(p))
                    .Where(p => category == null || p.CategoriesProduct.Where(c => c.Name == category).ToList<CategoryProduct>().Count > 0)
                    .OrderBy(p => p.ProductId)
@@ -42,10 +39,11 @@ namespace CardGameSite.WEB.Controllers
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = category == null ?
-                        _productService.GetObjectsDto().Count() :
-                        _productService.GetObjectsDto()
+                        _dataManager.ProductService.GetObjectsDto().Count() :
+                        _dataManager.ProductService.GetObjectsDto()
                             .Select(e => e.CategoriesProduct.Where(v => v.Name == category)).Count()
                 },
+
                 CurrentCategory = category
             };
 

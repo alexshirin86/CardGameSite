@@ -54,7 +54,9 @@ namespace CardGameSite.WEB
                     options.SignIn.RequireConfirmedEmail = false;
                 }).AddDependencyInjectionIdentityBuilder();
 
-            // зависимости            
+            services.AddScoped<DataManagerServices>();
+
+            // зависимости       
             services.AddDependencyInjectionServiceCollection(Configuration);
         }
 

@@ -27,11 +27,9 @@ namespace CardGameSite.BLL.Services.Implementations
             return _mapper.Map<IEnumerable<T>, IEnumerable<DTO>>(_uow.Repository.GetAll());
         }
 
-        public DTO GetObjectDto(int? idClassDTO)
+        public DTO GetObjectDto(int idClassDTO)
         {
-            if (idClassDTO == null)
-                throw new ValidationException("Не установлено id", "");
-            var obj = _uow.Repository.Get(idClassDTO.Value);
+            var obj = _uow.Repository.Get(idClassDTO);
             if (obj == null)
                 throw new ValidationException("Объект не найден", "");
 

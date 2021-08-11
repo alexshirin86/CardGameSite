@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CardGameSite.WEB.Models;
-using CardGameSite.BLL.Services.Interfaces;
+using CardGameSite.BLL.Infrastructure;
 using CardGameSite.BLL.DTO;
 using AutoMapper;
 using System.Linq;
@@ -10,22 +10,23 @@ namespace CardGameSite.WEB.Controllers
 {
     public class AdminController : Controller
     {
-        private IService<ProductDTO> _productService;
+        private DataManagerServices _dataManager;
         private IMapper _mapper;
-        public AdminController(IService<ProductDTO> service, IMapper mapper) {
-            _productService = service;
+
+        public AdminController(DataManagerServices dataManager, IMapper mapper) {
+            _dataManager = dataManager;
             _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            return View(_productService.GetObjectsDto()
+            return View(_dataManager.ProductService.GetObjectsDto()
                    .Select(p => _mapper.Map<ProductDTO, Product>(p)));
         }
 
         public ViewResult Edit(int productid)
         {
-            return View(_productService.GetObjectsDto()
+            return View(_dataManager.ProductService.GetObjectsDto()
                    .Select(p => _mapper.Map<ProductDTO, Product>(p))
                    .FirstOrDefault(p => p.ProductId == productid));
         }
@@ -35,7 +36,7 @@ namespace CardGameSite.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                _productService.SaveObject(_mapper.Map<Product, ProductDTO>(product));
+                _dataManager.ProductService.SaveObject(_mapper.Map<Product, ProductDTO>(product));
                 TempData["message"] = $"Товар Name = '{product.Name}' сохранен.";
                 return RedirectToAction("Index");
             }
@@ -49,7 +50,7 @@ namespace CardGameSite.WEB.Controllers
         [HttpPost]
         public IActionResult Delete(int productid)
         {
-            Product deletedProduct = _mapper.Map < ProductDTO, Product>(_productService.DeleteObject(productid));
+            Product deletedProduct = _mapper.Map < ProductDTO, Product>(_dataManager.ProductService.DeleteObject(productid));
             if (deletedProduct != null)
             {
                 TempData["message"] = $"Продукт Name = '{deletedProduct.Name}' удален.";                

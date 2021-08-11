@@ -5,7 +5,7 @@ namespace CardGameSite.BLL.Services.Interfaces
 {
     public interface IService<classDTO> where classDTO : class
     {
-        classDTO GetObjectDto(int? idClassDTO);
+        classDTO GetObjectDto(int idClassDTO);
         IEnumerable<classDTO> GetObjectsDto();
 
         void SaveObject(classDTO obj);
