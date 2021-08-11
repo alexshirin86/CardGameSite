@@ -27,12 +27,13 @@ namespace CardGameSite.DAL.Infrastructure
                 options.UseSqlServer(
                    config.GetConnectionString("DefaultConnection")));
 
+
             return services;
         }
 
-        public static IdentityBuilder AddDependencyInjectionIdentityBuilder(this IdentityBuilder builder)
+        public static IdentityBuilder AddIdentityBuilder(this IdentityBuilder builder)
         {
-            builder.AddEntityFrameworkStores<SiteDbContext>().AddDefaultUI();
+            builder.AddEntityFrameworkStores<SiteDbContext>();
 
             return builder;
         }

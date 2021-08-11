@@ -11,20 +11,21 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using CardGameSite.WEB.Models;
+using CardGameSite.BLL.Infrastructure;
+
 
 namespace CardGameSite.WEB.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly AppUserManager _userManager;
+        private readonly AppSignInManager _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, 
+        public LoginModel(AppSignInManager signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            AppUserManager userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -32,7 +33,7 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public CardGameSite.WEB.Models.LoginUser Input { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -41,19 +42,7 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            [Display(Name = "Запомнить")]
-            public bool RememberMe { get; set; }
-        }
+       
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -99,7 +88,7 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Ошибка входа");
                     return Page();
                 }
             }

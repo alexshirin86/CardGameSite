@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using CardGameSite.WEB.Models;
+using CardGameSite.DAL.Entities;
 
 namespace CardGameSite.WEB.Areas.Identity.Pages.Account
 {

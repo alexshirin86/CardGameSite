@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using CardGameSite.WEB.Models;
+using CardGameSite.BLL.Infrastructure;
 
 
 namespace CardGameSite.WEB.Areas.Identity.Pages.Account
@@ -18,10 +18,10 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<User> _userManager;
+        private readonly AppUserManager _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(AppUserManager userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -60,8 +60,8 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Сброс пароля",
+                    $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Сбросить пароль</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

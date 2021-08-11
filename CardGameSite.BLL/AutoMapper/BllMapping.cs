@@ -8,14 +8,9 @@ namespace CardGameSite.BLL.AutoMapper
     {
         public BllMapping()
         {
-            CreateMap<Product, ProductDTO>();
-            CreateMap<ProductDTO, Product>();
-
-            CreateMap<CategoryProduct, CategoryProductDTO>(); 
-            CreateMap<CategoryProductDTO, CategoryProduct>();
-
-            CreateMap<UserDTO, User>();
-            CreateMap<User, UserDTO>();
+            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<CategoryProduct, CategoryProductDTO>().ReverseMap(); 
+            CreateMap<User, UserDTO>().ReverseMap();
 
         }
     }

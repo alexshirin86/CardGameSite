@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using CardGameSite.DAL.Entities.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using CardGameSite.DAL.Entities.Interfaces;
 
 namespace CardGameSite.DAL.Entities
 {
-    public class User : IdentityUser<int>, IEntity
+    public class Role : IdentityRole<int>, IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -13,8 +13,7 @@ namespace CardGameSite.DAL.Entities
 
         [Required]
         [MaxLength(50)]
-        public override string UserName { get; set; }
+        public override string Name { get; set; }
 
-        public User() { }
     }
 }

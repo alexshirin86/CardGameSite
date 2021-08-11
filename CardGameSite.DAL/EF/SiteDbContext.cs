@@ -5,21 +5,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 
+
 namespace CardGameSite.DAL.EF
 {
-    public class SiteDbContext : IdentityDbContext<User, IdentityRole<int>, int>
+    public class SiteDbContext : IdentityDbContext<User, Role, int>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<CategoryProduct> CategoriesProduct { get; set; }
 
-        public SiteDbContext() { }
+        public SiteDbContext() {}
 
-        public SiteDbContext(DbContextOptions options)
-            : base(options)
-        {
-            //Database.Migrate();
-        }
-
+        public SiteDbContext(DbContextOptions options): base(options) {}
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,28 +24,7 @@ namespace CardGameSite.DAL.EF
             base.OnConfiguring(optionsBuilder);
         }
 
-        /*
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>()
-                .HasMany<CategoryProduct>(s => s.Categories)
-                .WithMany(c => c.Products)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ProductCategoryProduct",
-                    j => j
-                        .HasOne<CategoryProduct>()
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .HasConstraintName("categoryProductId")
-                        .OnDelete(DeleteBehavior.Cascade),
-                    j => j
-                        .HasOne<Product>()
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .HasConstraintName("productId")
-                        .OnDelete(DeleteBehavior.ClientCascade));
-                            
-        }*/
+        //protected override void OnModelCreating(ModelBuilder modelBuilder){}
 
-    }
+     }
 }

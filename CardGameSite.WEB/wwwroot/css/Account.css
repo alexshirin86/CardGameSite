@@ -1,0 +1,8 @@
+﻿.account-manage-container {
+    position: absolute;
+    top: 13%;
+    color: white !important;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+}

@@ -1,4 +1,4 @@
-﻿using CardGameSite.WEB.Models;
+﻿using CardGameSite.BLL.Infrastructure;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,12 +11,12 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly AppUserManager _userManager;
+        private readonly AppSignInManager _signInManager;
 
         public IndexModel(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            AppUserManager userManager,
+            AppSignInManager signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,7 +37,7 @@ namespace CardGameSite.WEB.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(User user)
+        private async Task LoadAsync(dynamic user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

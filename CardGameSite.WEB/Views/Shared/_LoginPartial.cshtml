@@ -1,28 +1,32 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using CardGameSite.WEB.Models
+@using CardGameSite.BLL.Infrastructure
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+
+@inject AppSignInManager SignInManager
+@inject AppUserManager UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Добро пожаловать, @UserManager.GetUserName(User)!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Выход</button>
-            </form>
-        </li>
+
+
+               <li class="nav-item">
+                    <a id="manage" class="user-logining nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Добро пожаловать, @UserManager.GetUserName(User)!</a>
+                </li>
+                <li class="nav-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link">Выход</button>
+                    </form>
+                </li>
+
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link right-nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+            <a class="b-link nav-link right-nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link right-nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Вход</a>
+            <a class="b-link nav-link right-nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Вход</a>
         </li>
     }
 </ul>

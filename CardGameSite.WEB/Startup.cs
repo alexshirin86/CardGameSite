@@ -9,6 +9,7 @@ using CardGameSite.BLL.Infrastructure;
 using CardGameSite.WEB.AutoMapper;
 using CardGameSite.BLL.AutoMapper;
 using CardGameSite.WEB.Models;
+using CardGameSite.DAL.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
@@ -40,24 +41,28 @@ namespace CardGameSite.WEB
             // Конфигурация AutoMapper
             MapperConfiguration mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new WebMapping());  //mapping between Web and Business layer objects
-                cfg.AddProfile(new BllMapping());  // mapping between Business and DB layer objects
+                cfg.AddProfile(new WebMapping()); 
+                cfg.AddProfile(new BllMapping());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-                        
-            services.AddIdentity<User, IdentityRole<int>>(
+
+            // зависимости       
+            services.AddServiceCollection(Configuration);
+
+            services.AddIdentityBuilder(
                 options =>
                 {
                     options.Password.RequireNonAlphanumeric = false;
                     options.SignIn.RequireConfirmedEmail = false;
-                }).AddDependencyInjectionIdentityBuilder();
+                });
 
+            services.AddScoped<AppUserManager>();
+            services.AddScoped<AppSignInManager>();
             services.AddScoped<DataManagerServices>();
 
-            // зависимости       
-            services.AddDependencyInjectionServiceCollection(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

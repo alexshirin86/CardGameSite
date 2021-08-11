@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
-using CardGameSite.DAL.Entities;
 using CardGameSite.DAL.Entities.Interfaces;
 using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Repositories.Interfaces;
@@ -16,20 +15,13 @@ namespace CardGameSite.DAL.Repositories.Implementations
     {
         
         internal protected readonly SiteDbContext _context;
-        private readonly Dictionary<string,string> _setsDbContext;
         private readonly DbSet<T> _setT;
 
         public Repository(SiteDbContext context)
         {
-            _setsDbContext = new Dictionary<string, string>
-            {
-                [typeof(Product).Name] = "Products",
-                [typeof(CategoryProduct).Name] = "CategoriesProduct",
-
-            };
             _context = context;
 
-            _setT = (DbSet<T>)typeof(SiteDbContext).GetProperty(_setsDbContext[typeof(T).Name]).GetValue(_context);
+            _setT = _context.Set<T>();
         }
 
         public IEnumerable<T> GetAll()

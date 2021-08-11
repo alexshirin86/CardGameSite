@@ -6,26 +6,28 @@ using CardGameSite.DAL.Entities;
 using CardGameSite.BLL.DTO;
 using CardGameSite.BLL.Services.Implementations;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 
 namespace CardGameSite.BLL.Infrastructure
 {
     public static class CollectionDependencyInjections
     {
-        public static IServiceCollection AddDependencyInjectionServiceCollection(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddServiceCollection(this IServiceCollection services, IConfiguration config)
         {            
             services.AddTransient<IService<ProductDTO>, Service<Product, ProductDTO>>();
             services.AddTransient<IService<CategoryProductDTO>, Service<CategoryProduct, CategoryProductDTO>>();
             services.AddTransient<IService<UserDTO>, Service<User, UserDTO>>();
-
-            //services.AddScoped<DataManagerServices>();
-
+            
             return DAL.Infrastructure.CollectionDependencyInjections.AddDependencyInjectionServiceCollection(services, config);
         }
 
-        public static IdentityBuilder AddDependencyInjectionIdentityBuilder(this IdentityBuilder builder)
+        public static IdentityBuilder AddIdentityBuilder(this IServiceCollection services, Action<IdentityOptions> setupAction)
         {
-            return DAL.Infrastructure.CollectionDependencyInjections.AddDependencyInjectionIdentityBuilder(builder);
+            return services.AddIdentity<User, Role>(setupAction)
+                .AddIdentityBuilder()
+                .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
+                .AddDefaultUI();
         }
     }
 }

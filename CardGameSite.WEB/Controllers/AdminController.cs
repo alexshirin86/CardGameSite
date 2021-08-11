@@ -20,8 +20,7 @@ namespace CardGameSite.WEB.Controllers
 
         public IActionResult Index()
         {
-            return View(_dataManager.ProductService.GetObjectsDto()
-                   .Select(p => _mapper.Map<ProductDTO, Product>(p)));
+            return View();
         }
 
         public ViewResult Edit(int productid)
