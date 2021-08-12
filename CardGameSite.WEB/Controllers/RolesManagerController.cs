@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardGameSite.WEB.Models;
 using CardGameSite.BLL.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CardGameSite.WEB.Controllers
 {
@@ -17,9 +19,14 @@ namespace CardGameSite.WEB.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
+        [Authorize(Roles = "admin")]
         public IActionResult Index() => View(_roleManager.Roles.ToList());
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create() => View();
+
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create(string name)
         {
@@ -42,6 +49,7 @@ namespace CardGameSite.WEB.Controllers
             return View(name);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
@@ -53,8 +61,10 @@ namespace CardGameSite.WEB.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult UserList() => View(_userManager.Users.ToList());
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(string userId)
         {
             // получаем пользователя
@@ -76,6 +86,7 @@ namespace CardGameSite.WEB.Controllers
 
             return NotFound();
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {

@@ -136,7 +136,7 @@ body {
     color: white;
 }
 
-#logout, #manage {
+#logout, #manage, #a-admin {
     font-size: 1.3em;
 }
 

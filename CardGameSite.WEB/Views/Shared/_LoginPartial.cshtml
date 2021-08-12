@@ -4,20 +4,26 @@
 
 @inject AppSignInManager SignInManager
 @inject AppUserManager UserManager
+@inject AppRoleManager AppRoleManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
 
+        @if(UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin").Result){
+             <li class="nav-item">
+                <a id="a-admin" href="~/UsersManager">Админ</a>
+             </li>
+        }
+        <li class="nav-item">
+            <a id="manage" class="user-logining nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Добро пожаловать, @UserManager.GetUserName(User)!</a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link">Выход</button>
+            </form>
+        </li>
 
-               <li class="nav-item">
-                    <a id="manage" class="user-logining nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Добро пожаловать, @UserManager.GetUserName(User)!</a>
-                </li>
-                <li class="nav-item">
-                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                        <button id="logout" type="submit" class="nav-link btn btn-link">Выход</button>
-                    </form>
-                </li>
 
     }
     else

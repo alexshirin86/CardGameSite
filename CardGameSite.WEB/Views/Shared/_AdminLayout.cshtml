@@ -21,8 +21,14 @@
         @if (TempData["message"] != null)
         {
             <div class="temp-data alert alert-success">@TempData["message"]</div>
-        }    
-        @RenderBody()    
+        }  
+     
+    <div class="admin-div-menu">
+        <a class="a-menu-admin" href="~/ProductsManager">Товары</a>
+        <a class="a-menu-admin" href="~/UsersManager">Пользователи</a>
+        <a class="a-menu-admin" href="~/RolesManager">Роли</a>
+    </div>
+    @RenderBody()
 </body>
 </html>
 

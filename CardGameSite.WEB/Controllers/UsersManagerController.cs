@@ -23,13 +23,16 @@ namespace CardGameSite.WEB.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Index()
         {
             return View(_userManager.Users.ToList());
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create() => View();
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create(RegisterUser model)
         {
@@ -52,6 +55,7 @@ namespace CardGameSite.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -63,6 +67,7 @@ namespace CardGameSite.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditUser model)
         {
@@ -91,6 +96,7 @@ namespace CardGameSite.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
