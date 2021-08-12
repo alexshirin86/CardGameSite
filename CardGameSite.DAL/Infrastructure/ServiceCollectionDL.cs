@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CardGameSite.DAL.Infrastructure
 {
-    public static class CollectionDependencyInjections
+    public static class ServiceCollectionDL
     {
-        public static IServiceCollection AddDependencyInjectionServiceCollection(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddServiceCollectionDL(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IUnitOfWork<Product>, UnitOfWork<Product>>();
             services.AddTransient<IUnitOfWork<CategoryProduct>, UnitOfWork<CategoryProduct>>();
@@ -31,7 +31,7 @@ namespace CardGameSite.DAL.Infrastructure
             return services;
         }
 
-        public static IdentityBuilder AddIdentityBuilder(this IdentityBuilder builder)
+        public static IdentityBuilder AddIdentityDL(this IdentityBuilder builder)
         {
             builder.AddEntityFrameworkStores<SiteDbContext>();
 

@@ -31,7 +31,7 @@ namespace CardGameSite.WEB.Components
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUserManager.UserType { Email = model.Email, UserName = model.Email };
+                var user = new AppUserManager.UserT { Email = model.Email, UserName = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

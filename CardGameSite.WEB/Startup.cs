@@ -49,9 +49,9 @@ namespace CardGameSite.WEB
             services.AddSingleton(mapper);
 
             // зависимости       
-            services.AddServiceCollection(Configuration);
+            services.AddServiceCollectionBL(Configuration);
 
-            services.AddIdentityBuilder(
+            services.AddIdentityBL(
                 options =>
                 {
                     options.Password.RequireNonAlphanumeric = false;
@@ -61,8 +61,7 @@ namespace CardGameSite.WEB
             services.AddScoped<AppUserManager>();
             services.AddScoped<AppSignInManager>();
             services.AddScoped<DataManagerServices>();
-
-            
+                       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

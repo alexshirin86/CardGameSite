@@ -1,6 +1,7 @@
 ﻿using CardGameSite.DAL.Entities.Interfaces;
 using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Repositories.Interfaces;
+using System.Threading.Tasks;
 
 using System;
 
@@ -22,7 +23,7 @@ namespace CardGameSite.DAL.Repositories
         public void Save()
         {
             //System.Diagnostics.Debug.WriteLine("Save is " + _context.SaveChanges());
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
 
         

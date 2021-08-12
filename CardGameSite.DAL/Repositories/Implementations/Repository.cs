@@ -6,7 +6,7 @@ using CardGameSite.DAL.Entities.Interfaces;
 using CardGameSite.DAL.EF;
 using CardGameSite.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
+using System.Threading.Tasks;
 
 
 namespace CardGameSite.DAL.Repositories.Implementations
@@ -24,24 +24,25 @@ namespace CardGameSite.DAL.Repositories.Implementations
             _setT = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return _setT;
+            Task<IEnumerable<T>> task = Task.Factory.StartNew(() => _setT.AsEnumerable<T>());
+            return await task;
         }
 
-        public T Get(int id)
+        public async Task<T> GetAsync(int id)
         {
-            return _setT.Find(id);
+            return await _setT.FindAsync(id);
         }
 
-        public void Create(T obj)
+        public async void CreateAsync(T obj)
         {
-            _setT.Add(obj);
+            await _setT.AddAsync(obj);
         }
 
-        public void Update(T obj)
+        public async void UpdateAsync(T obj)
         {
-            T dЬEntity = _setT.FirstOrDefault(p => p.Id == obj.Id);
+            T dЬEntity = await _setT.FirstOrDefaultAsync(p => p.Id == obj.Id);
                         
             //System.Diagnostics.Debug.WriteLine("dЬEntity type = " + dЬEntity.GetType().Name);
             
@@ -59,17 +60,20 @@ namespace CardGameSite.DAL.Repositories.Implementations
             }            
         }
 
-        public IEnumerable<T> Find(Func<T, Boolean> predicate)
+        public async Task<IEnumerable<T>> FindAsync(Func<T, Boolean> predicate)
         {
-            return _setT.Where(predicate).ToList();
+            Task<IEnumerable<T>> task = Task.Factory.StartNew(() => _setT.Where(predicate).AsEnumerable<T>());
+            return await task;
         }
 
-        public T Delete(int id)
+        public async Task<T> DeleteAsync(int id)
         {
-            T obj = _setT.Find(id);
+            T obj = await _setT.FindAsync(id);
             if (obj != null)
             {
-                _setT.Remove(obj);
+
+                Task task = Task.Factory.StartNew(() => _setT.Remove(obj));
+                await task;
                 return obj;
             }
 

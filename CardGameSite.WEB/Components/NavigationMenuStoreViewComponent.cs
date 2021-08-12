@@ -21,7 +21,7 @@ namespace CardGameSite.WEB.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            List<CategoryProduct> listCategoriesProduct = _dataManager.CategoriesProductService.GetObjectsDto().Select(p => _mapper.Map<CategoryProduct>(p)).ToList();
+            List<CategoryProduct> listCategoriesProduct = _dataManager.CategoriesProductService.GetObjectsDtoAsync().Result.Select(p => _mapper.Map<CategoryProduct>(p)).ToList();
             List<string> categoriesProduct = listCategoriesProduct.Select(g => g.Name).Distinct().ToList(); ;
                         
             return View(categoriesProduct);

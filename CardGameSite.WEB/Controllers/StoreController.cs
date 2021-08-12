@@ -27,7 +27,7 @@ namespace CardGameSite.WEB.Controllers
             
             ProductsList productList = new ProductsList()
             {
-                Products = _dataManager.ProductService.GetObjectsDto()                   
+                Products = _dataManager.ProductService.GetObjectsDtoAsync().Result                  
                    .Select(p => _mapper.Map<ProductDTO, Product>(p))
                    .Where(p => category == null || p.CategoriesProduct.Where(c => c.Name == category).ToList<CategoryProduct>().Count > 0)
                    .OrderBy(p => p.ProductId)
@@ -39,8 +39,8 @@ namespace CardGameSite.WEB.Controllers
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = category == null ?
-                        _dataManager.ProductService.GetObjectsDto().Count() :
-                        _dataManager.ProductService.GetObjectsDto()
+                        _dataManager.ProductService.GetObjectsDtoAsync().Result.Count() :
+                        _dataManager.ProductService.GetObjectsDtoAsync().Result
                             .Select(e => e.CategoriesProduct.Where(v => v.Name == category)).Count()
                 },
 

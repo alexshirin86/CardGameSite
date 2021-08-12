@@ -4,6 +4,7 @@ using CardGameSite.BLL.Services.Interfaces;
 using System.Collections.Generic;
 using CardGameSite.BLL.DTO.Interfaces;
 using AutoMapper;
+using System.Threading.Tasks;
 
 
 namespace CardGameSite.BLL.Services.Implementations
@@ -21,44 +22,47 @@ namespace CardGameSite.BLL.Services.Implementations
             _mapper = mapper;
         }
 
-        public IEnumerable<DTO> GetObjectsDto()
+        public async Task<IEnumerable<DTO>> GetObjectsDtoAsync()
         {
 
-            return _mapper.Map<IEnumerable<T>, IEnumerable<DTO>>(_uow.Repository.GetAll());
+            return _mapper.Map<IEnumerable<T>, IEnumerable<DTO>>(await _uow.Repository.GetAllAsync());
         }
 
-        public DTO GetObjectDto(int idClassDTO)
+        public async Task<DTO> GetObjectDtoAsync(int idClassDTO)
         {
-            var obj = _uow.Repository.Get(idClassDTO);
+            var obj = await _uow.Repository.GetAsync(idClassDTO);
             if (obj == null)
                 throw new ValidationException("Объект не найден", "");
 
             return _mapper.Map<T, DTO>(obj);            
         }
 
-        public void SaveObject(DTO obj)
+        public async void SaveObjectAsync(DTO obj)
         {
             T objT = _mapper.Map<DTO, T>(obj);
 
             if (obj.Id == 0)
             {
-                _uow.Repository.Create(objT);
+                Task task = Task.Factory.StartNew(() => _uow.Repository.CreateAsync(objT));
+                await task;
             }
             else
             {
-                _uow.Repository.Update(objT);
+                Task task = Task.Factory.StartNew(() => _uow.Repository.UpdateAsync(objT));
+                await task;
             }
 
             _uow.Save();
         }
 
-        public DTO DeleteObject(int idClassDTO)
+        public async Task<DTO> DeleteObjectAsync(int idClassDTO)
         {            
-            T obj = _uow.Repository.Delete(idClassDTO);
+            T obj = await _uow.Repository.DeleteAsync(idClassDTO);
 
             if (obj != null)
+            {
                 _uow.Save();
-
+            }                
             return _mapper.Map<T, DTO>(obj);
         }
 

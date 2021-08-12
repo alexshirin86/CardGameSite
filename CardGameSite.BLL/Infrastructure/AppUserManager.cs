@@ -22,9 +22,9 @@ namespace CardGameSite.BLL.Infrastructure
 
         public static Type UType { get { return typeof(User); } }
 
-        public class UserType : User
+        public class UserT : User
         {
-            public UserType() : base() { }
+            //public UserT() : base() { }
         }
     }
 }

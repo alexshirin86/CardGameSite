@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace CardGameSite.DAL.Repositories.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        IEnumerable<T> Find(Func<T, Boolean> predicate);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetAsync(int id);
+        Task<IEnumerable<T>> FindAsync(Func<T, Boolean> predicate);
 
-        void Create(T item);
-        void Update(T item);
-        T Delete(int id);
+        void CreateAsync(T item);
+        void UpdateAsync(T item);
+        Task<T> DeleteAsync(int id);
     }
 }

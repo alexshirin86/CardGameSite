@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace CardGameSite.BLL.Services.Interfaces
 {
     public interface IService<classDTO> where classDTO : class
     {
-        classDTO GetObjectDto(int idClassDTO);
-        IEnumerable<classDTO> GetObjectsDto();
+        Task<classDTO> GetObjectDtoAsync(int idClassDTO);
+        Task<IEnumerable<classDTO>> GetObjectsDtoAsync();
 
-        void SaveObject(classDTO obj);
+        void SaveObjectAsync(classDTO obj);
 
-        classDTO DeleteObject(int idClassDTO);
+        Task<classDTO> DeleteObjectAsync(int idClassDTO);
         void Dispose();
     }
 }

@@ -30,7 +30,7 @@ namespace CardGameSite.WEB.Pages
 
         public IActionResult OnPost(int productId, string returnUrl)
         {            
-            Product product = _service.GetObjectsDto().Select(p => _mapper.Map<ProductDTO, Product>(p))
+            Product product = _service.GetObjectsDtoAsync().Result.Select(p => _mapper.Map<ProductDTO, Product>(p))
                 .FirstOrDefault(p => p.ProductId == productId);            
             Cart.AddItem(product, 1);
             return RedirectToPage(new { returnUrl = returnUrl });
