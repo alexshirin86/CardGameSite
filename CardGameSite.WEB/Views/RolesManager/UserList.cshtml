@@ -1,0 +1,18 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewBag.Title = "Список пользователей";
+    Layout = "_AdminLayout";
+}
+<div class="admin-container">
+    <table class="admin-table table">
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

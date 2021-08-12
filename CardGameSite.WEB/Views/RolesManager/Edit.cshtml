@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Role
+
+@{
+    ViewBag.Title = "Изменение ролей для пользователя";
+    Layout = "_AdminLayout";
+}
+<div class="admin-container">
+    <h2>Изменение ролей для пользователя @Model.UserEmail</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" name="userId" value="@Model.UserId" />
+        <div class="form-group">
+            @foreach (string roleName in Model.AllRoles)
+            {
+                <input type="checkbox" name="roles" value="@roleName"
+                       @(Model.UserRoles.Contains(roleName) ? "checked=\"checked\"" : "") />@roleName <br />
+                }
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>

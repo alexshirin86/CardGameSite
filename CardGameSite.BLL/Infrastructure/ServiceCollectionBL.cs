@@ -15,9 +15,9 @@ namespace CardGameSite.BLL.Infrastructure
     {
         public static IServiceCollection AddServiceCollectionBL(this IServiceCollection services, IConfiguration config)
         {            
-            services.AddTransient<IService<ProductDTO>, Service<Product, ProductDTO>>();
-            services.AddTransient<IService<CategoryProductDTO>, Service<CategoryProduct, CategoryProductDTO>>();
-            services.AddTransient<IService<UserDTO>, Service<User, UserDTO>>();
+            services.AddScoped<IService<ProductDTO>, Service<Product, ProductDTO>>();
+            services.AddScoped<IService<CategoryProductDTO>, Service<CategoryProduct, CategoryProductDTO>>();
+            services.AddScoped<IService<UserDTO>, Service<User, UserDTO>>();
             
             return services.AddServiceCollectionDL(config);
         }

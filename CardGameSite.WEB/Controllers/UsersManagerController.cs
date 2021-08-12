@@ -1,33 +1,37 @@
-﻿using Microsoft.AspNetCore.Identity;
-using CardGameSite.WEB.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using CardGameSite.WEB.Models;
 using CardGameSite.BLL.Infrastructure;
 using AutoMapper;
 
-namespace CardGameSite.WEB.Components
+namespace CardGameSite.WEB.Controllers
 {
-    public class UsersManagerViewComponent : ViewComponent
+    public class UsersManagerController : Controller
     {
+        
         AppUserManager _userManager;
         private IMapper _mapper;
 
-        public UsersManagerViewComponent(AppUserManager userManager, IMapper mapper)
+        //[Authorize(Roles = "admin")]
+        public UsersManagerController(AppUserManager userManager, IMapper mapper)
         {
             _userManager = userManager;
             _mapper = mapper;
         }
 
-        public IViewComponentResult Invoke()
+        public IActionResult Index()
         {
             return View(_userManager.Users.ToList());
         }
 
-        public IViewComponentResult Create() => View();
+        public IActionResult Create() => View();
 
         [HttpPost]
-        public async Task<IViewComponentResult> Create(RegisterUser model)
+        public async Task<IActionResult> Create(RegisterUser model)
         {
             if (ModelState.IsValid)
             {
@@ -35,7 +39,7 @@ namespace CardGameSite.WEB.Components
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return View();
+                    return RedirectToAction("Index"); ;
                 }
                 else
                 {
@@ -48,19 +52,19 @@ namespace CardGameSite.WEB.Components
             return View(model);
         }
 
-        public async Task<IViewComponentResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
-                return View();
+                return NotFound(); 
             }
-            EditUser model = new EditUser { Id = user.Id, Email = user.Email};
+            EditUser model = new EditUser { Id = user.Id, Email = user.Email };
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IViewComponentResult> Edit(EditUser model)
+        public async Task<IActionResult> Edit(EditUser model)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +77,7 @@ namespace CardGameSite.WEB.Components
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
-                        return View();
+                        return RedirectToAction("Index");
                     }
                     else
                     {
@@ -88,15 +92,14 @@ namespace CardGameSite.WEB.Components
         }
 
         [HttpPost]
-        public async Task<IViewComponentResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 IdentityResult result = await _userManager.DeleteAsync(user);
             }
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
- 

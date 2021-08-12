@@ -1,15 +1,20 @@
 ﻿@model IEnumerable<Product>
+@{
+    ViewBag.Title  =  "Товары";
+    Layout  =  "_AdminLayout";
+}
 
-<table class="admin-table table table-striped table-bordered  table-sm">
-    <tr>
-        <th class="text-right">ID</th>
-        <th>Имя</th>
-        <th>Описание</th>
-        <th c.lass="text-right">Цена</th>
-        <th class="text-center">Действие</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="admin-container">
+    <table class="admin-table table table-striped table-bordered  table-sm">
+        <tr>
+            <th class="text-right">ID</th>
+            <th>Имя</th>
+            <th>Описание</th>
+            <th c.lass="text-right">Цена</th>
+            <th class="text-center">Действие</th>
+        </tr>
+        @foreach (var item in Model)
+        {
         <tr>
             <td class="text-right">@item.ProductId</td>
             <td>@item.Name</td>
@@ -28,8 +33,9 @@
                 </form>
             </td>
         </tr>
-    }
-</table>
-<div class="text-center">
-    <a asp-action="Create" class="btn btn-primary">Добавить товар</a>
+        }
+    </table>
+    <div class="text-center">
+        <a asp-action="Create" class="btn btn-primary">Добавить товар</a>
+    </div>
 </div>

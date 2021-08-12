@@ -37,7 +37,7 @@ namespace CardGameSite.BLL.Services.Implementations
             return _mapper.Map<T, DTO>(obj);            
         }
 
-        public async void SaveObjectAsync(DTO obj)
+        public async Task<int> SaveObjectAsync(DTO obj)
         {
             T objT = _mapper.Map<DTO, T>(obj);
 
@@ -52,7 +52,7 @@ namespace CardGameSite.BLL.Services.Implementations
                 await task;
             }
 
-            _uow.Save();
+            return await _uow.SaveAsync();
         }
 
         public async Task<DTO> DeleteObjectAsync(int idClassDTO)
@@ -61,7 +61,7 @@ namespace CardGameSite.BLL.Services.Implementations
 
             if (obj != null)
             {
-                _uow.Save();
+                await _uow.SaveAsync();
             }                
             return _mapper.Map<T, DTO>(obj);
         }

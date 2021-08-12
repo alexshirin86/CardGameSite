@@ -20,10 +20,10 @@ namespace CardGameSite.DAL.Repositories
             Repository = _repo;
         }
        
-        public void Save()
+        public async Task<int> SaveAsync()
         {
             //System.Diagnostics.Debug.WriteLine("Save is " + _context.SaveChanges());
-            _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         

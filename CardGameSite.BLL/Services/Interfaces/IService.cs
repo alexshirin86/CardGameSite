@@ -9,7 +9,7 @@ namespace CardGameSite.BLL.Services.Interfaces
         Task<classDTO> GetObjectDtoAsync(int idClassDTO);
         Task<IEnumerable<classDTO>> GetObjectsDtoAsync();
 
-        void SaveObjectAsync(classDTO obj);
+        Task<int> SaveObjectAsync(classDTO obj);
 
         Task<classDTO> DeleteObjectAsync(int idClassDTO);
         void Dispose();

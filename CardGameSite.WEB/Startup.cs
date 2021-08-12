@@ -60,6 +60,7 @@ namespace CardGameSite.WEB
 
             services.AddScoped<AppUserManager>();
             services.AddScoped<AppSignInManager>();
+            services.AddScoped<AppRoleManager>();
             services.AddScoped<DataManagerServices>();
                        
         }
