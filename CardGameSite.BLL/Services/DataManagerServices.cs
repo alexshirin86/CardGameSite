@@ -1,7 +1,7 @@
 ﻿using CardGameSite.BLL.DTO;
 using CardGameSite.BLL.Services.Interfaces;
 
-namespace CardGameSite.BLL.Infrastructure
+namespace CardGameSite.BLL.Services
 {
     public class DataManagerServices
     {

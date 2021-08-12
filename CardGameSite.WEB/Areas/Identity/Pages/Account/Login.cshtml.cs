@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using CardGameSite.BLL.Infrastructure;
+using CardGameSite.BLL.Services;
 
 
 namespace CardGameSite.WEB.Areas.Identity.Pages.Account

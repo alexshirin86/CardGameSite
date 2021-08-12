@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace CardGameSite.BLL.Infrastructure
+namespace CardGameSite.BLL.Services
 {
     public class AppRoleManager : RoleManager<Role>
     {

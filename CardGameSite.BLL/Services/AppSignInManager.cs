@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 
-namespace CardGameSite.BLL.Infrastructure
+namespace CardGameSite.BLL.Services
 {
     public class AppSignInManager : SignInManager<User>
     {

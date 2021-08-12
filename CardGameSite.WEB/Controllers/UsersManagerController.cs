@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using CardGameSite.WEB.Models;
-using CardGameSite.BLL.Infrastructure;
+using CardGameSite.BLL.Services;
 using AutoMapper;
 
 namespace CardGameSite.WEB.Controllers
@@ -14,13 +14,11 @@ namespace CardGameSite.WEB.Controllers
     {
         
         AppUserManager _userManager;
-        private IMapper _mapper;
 
         //[Authorize(Roles = "admin")]
-        public UsersManagerController(AppUserManager userManager, IMapper mapper)
+        public UsersManagerController(AppUserManager userManager)
         {
             _userManager = userManager;
-            _mapper = mapper;
         }
 
         [Authorize(Roles = "admin")]
@@ -39,10 +37,10 @@ namespace CardGameSite.WEB.Controllers
             if (ModelState.IsValid)
             {
                 var user = new AppUserManager.UserT { Email = model.Email, UserName = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index"); ;
+                    return RedirectToAction("Index");
                 }
                 else
                 {

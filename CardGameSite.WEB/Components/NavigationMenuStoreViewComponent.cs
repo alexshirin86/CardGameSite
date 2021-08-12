@@ -2,7 +2,7 @@
 using CardGameSite.WEB.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using CardGameSite.BLL.Infrastructure;
+using CardGameSite.BLL.Services;
 using AutoMapper;
 
 namespace CardGameSite.WEB.Components

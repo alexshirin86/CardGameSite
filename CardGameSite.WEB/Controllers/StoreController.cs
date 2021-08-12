@@ -1,6 +1,6 @@
 ﻿using CardGameSite.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
-using CardGameSite.BLL.Infrastructure;
+using CardGameSite.BLL.Services;
 using System.Linq;
 using CardGameSite.BLL.DTO;
 using AutoMapper;

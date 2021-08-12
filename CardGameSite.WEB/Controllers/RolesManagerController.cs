@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardGameSite.WEB.Models;
-using CardGameSite.BLL.Infrastructure;
+using CardGameSite.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -23,8 +23,7 @@ namespace CardGameSite.WEB.Controllers
         public IActionResult Index() => View(_roleManager.Roles.ToList());
 
         [Authorize(Roles = "admin")]
-        public IActionResult Create() => View();
-
+        //public IActionResult Create() => View();
 
         [Authorize(Roles = "admin")]
         [HttpPost]

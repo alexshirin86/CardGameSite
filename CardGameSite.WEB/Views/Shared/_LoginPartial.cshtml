@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using CardGameSite.BLL.Infrastructure
+@using CardGameSite.BLL.Services
 
 
 @inject AppSignInManager SignInManager
@@ -12,7 +12,7 @@
 
         @if(UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin").Result){
              <li class="nav-item">
-                <a id="a-admin" href="~/UsersManager">Админ</a>
+                <a id="a-admin" class="nav-link" href="~/UsersManager">Админ</a>
              </li>
         }
         <li class="nav-item">

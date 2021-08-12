@@ -9,7 +9,7 @@ using CardGameSite.BLL.Infrastructure;
 using CardGameSite.WEB.AutoMapper;
 using CardGameSite.BLL.AutoMapper;
 using CardGameSite.WEB.Models;
-using CardGameSite.DAL.Entities;
+using CardGameSite.BLL.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
@@ -110,8 +110,8 @@ namespace CardGameSite.WEB
                     pattern: "{controller=Store}/{action=Store}");
 
                 endpoints.MapControllerRoute(
-                    name: "admin",
-                    pattern: "{controller=Admin}/{action=Index}");
+                    name: "users",
+                    pattern: "{controller=UserManager}/{action=Index}");
 
             });
         }
